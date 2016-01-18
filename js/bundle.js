@@ -9,7 +9,15 @@ var _symbol2 = _interopRequireDefault(_symbol);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-new _symbol2.default(document.querySelector('.symbol'));
+var init = function init() {
+  new _symbol2.default(document.querySelector('.symbol'));
+};
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
 
 },{"./symbol":2,"babel-polyfill":3}],2:[function(require,module,exports){
 'use strict';

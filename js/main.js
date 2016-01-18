@@ -2,4 +2,12 @@
 import 'babel-polyfill';
 import Symbol from './symbol';
 
-new Symbol(document.querySelector('.symbol'));
+const init = () => {
+  new Symbol(document.querySelector('.symbol'));
+};
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
