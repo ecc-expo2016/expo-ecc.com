@@ -43,7 +43,7 @@
     "express": "^4.13.3",
     "node-sass": "^3.4.2",
     "postcss-cli": "^2.4.0",
-    "uglifyjs": "^2.4.10",
+    "uglify-js": "^2.6.1",
     "watchify": "^3.7.0"
   }
 }
