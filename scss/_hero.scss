@@ -1,0 +1,57 @@
+.hero {
+  position: relative;
+  display: flex;
+  min-height: 100vh;
+  padding: 1rem;
+
+  &__content {
+    width: 100%;
+    align-self: flex-end;
+  }
+
+  &__date {
+    font-size: 1.5rem;
+  }
+
+  &__place {
+    margin-top: -.2em;
+    font-size: 1.2rem;
+  }
+
+  &__logo {
+    display: none;
+
+    @media (min-width: $break-point) {
+      display: block;
+    }
+  }
+
+  &__social {
+    display: none;
+
+    @media (min-width: $break-point) {
+      display: block;
+    }
+  }
+
+  &__swing {
+    position: absolute;
+    top: 20%;
+    right: 2%;
+    font-size: 5vw;
+    transform-origin: left center;
+    animation: swing 2s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+  }
+}
+
+@keyframes swing {
+  0% {
+    transform: rotate(6deg);
+  }
+  50% {
+    transform: rotate(9deg);
+  }
+  100% {
+    transform: rotate(6deg);
+  }
+}

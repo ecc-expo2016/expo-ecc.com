@@ -1,0 +1,43 @@
+.footer {
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.ecc {
+  transition: opacity .5s;
+
+  &:hover {
+    opacity: .5;
+  }
+}
+
+.to-top {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 100;
+  display: none;
+  width: 4rem;
+  height: 4rem;
+  background-color: rgba($black,.8);
+  border-radius: 50%;
+  box-shadow: 0 0 10px $brand-bg;
+
+  &::before {
+    content: "";
+    position: absolute;
+    right: 50%;
+    bottom: 50%;
+    display: block;
+    width: 50%;
+    height: 50%;
+    transform: translate(50%,50%);
+    background-position: center center;
+    background-image: url('/img/to-top.svg');
+  }
+
+  @media (min-width: $break-point) {
+    display: block;
+  }
+}

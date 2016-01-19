@@ -1,0 +1,145 @@
+.section {
+  display: flex;
+  flex-direction: column;
+
+  &__headline {
+    margin-top: 4rem;
+    margin-bottom: 1rem;
+    font-weight: normal;
+    font-size: 4rem;
+    text-align: center;
+
+    span {
+      font-family: Muli, sans-serif;
+    }
+
+    small {
+      display: block;
+      margin-top: -.6em;
+      font-size: 1rem;
+    }
+  }
+
+  &__content {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: rgba($black,.8);
+  }
+
+  &__title {
+    margin-top: .5em;
+    margin-bottom: .5em;
+    font-weight: normal;
+    font-size: 1.25rem;
+    color: #00b7ee;
+  }
+
+  &__dl {
+    display: flex;
+    flex-wrap: wrap;
+
+    dt {
+      position: relative;
+      flex-basis: 5em;
+
+      &::after {
+        content: "：";
+        position: absolute;
+        right: 0;
+      }
+    }
+
+    dd {
+      flex-basis: calc(100% - 5em);
+    }
+  }
+}
+
+.access {
+  &__title {
+    font-size: 1.2rem;
+  }
+
+  &__address {
+    margin-top: 1em;
+  }
+
+  &__traffic {
+    margin-top: 1em;
+
+    dl {
+      display: flex;
+    }
+
+    dt {
+      position: relative;
+      flex-basis: 6em;
+      padding-right: 1em;
+
+      &::after {
+        content: "：";
+        position: absolute;
+        right: 0;
+      }
+    }
+
+    dd {
+      flex-basis: calc(100% - 7em);
+    }
+  }
+
+  &__map {
+    max-width: 640px;
+  }
+}
+
+.exhibit {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+
+  li {
+    flex-basis: calc(50% - .5rem);
+
+    &:nth-child(odd) {
+      margin-right: .5rem;
+    }
+
+    &:nth-child(even) {
+      margin-left: .5rem;
+    }
+
+    &:not(:nth-child(-n+2)) {
+      margin-top: 1rem;
+    }
+  }
+
+  &__panel {
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 250px;
+    text-align: center;
+    background-color: #333;
+
+    &::before {
+      content: "";
+      display: block;
+      padding-top: 100%;
+    }
+  }
+
+  &__title {
+    position: absolute;
+    right: 50%;
+    bottom: 50%;
+    transform: translate(50%,50%);
+    font-size: 1.2rem;
+    white-space: nowrap;
+
+    small {
+      display: block;
+      font-size: .6em;
+    }
+  }
+}
