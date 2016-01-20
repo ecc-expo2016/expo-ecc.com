@@ -85,6 +85,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function () {
+  var $scrollElement = (0, _jquery2.default)('html, body');
+
+  var handleClickHashLink = function handleClickHashLink(evt) {
+    evt.preventDefault();
+
+    var hash = (0, _jquery2.default)(this).attr('href').slice(1);
+    scrollToHash(hash, $scrollElement);
+  };
+
   var $hashLink = (0, _jquery2.default)('a[href^="#"]');
   $hashLink.on('click', handleClickHashLink);
 };
@@ -99,15 +108,11 @@ var _lodash2 = _interopRequireDefault(_lodash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var $scrollElement = (0, _jquery2.default)('html, body');
 var duration = 800;
 var prevHash = undefined;
 var throttled = undefined;
 
-var handleClickHashLink = function handleClickHashLink(evt) {
-  evt.preventDefault();
-  var hash = (0, _jquery2.default)(this).attr('href').slice(1);
-
+var scrollToHash = function scrollToHash(hash, $scrollElement) {
   if (hash !== prevHash) {
     var scrolling = undefined;
 
@@ -255,12 +260,12 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function () {
-  $btn.on('click', function () {
-    return isOpen ? close() : open();
-  });
+  var $btn = (0, _jquery2.default)('.header__btn');
+  var $nav = (0, _jquery2.default)('.nav');
+  $btn.on('click', handleClickToggleBtn.bind(null, $btn, $nav));
 
   var $hashLink = (0, _jquery2.default)('a[href^="#"]');
-  $hashLink.on('click', handleClickHashLink);
+  $hashLink.on('click', handleClickHashLink.bind(null, $btn, $nav));
 };
 
 var _jquery = require('jquery');
@@ -269,11 +274,9 @@ var _jquery2 = _interopRequireDefault(_jquery);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var $btn = (0, _jquery2.default)('.header__btn');
-var $nav = (0, _jquery2.default)('.nav');
 var isOpen = false;
 
-var open = function open() {
+var open = function open($btn, $nav) {
   $btn.removeClass('is-close').addClass('is-open');
 
   $nav.addClass('is-open');
@@ -281,7 +284,7 @@ var open = function open() {
   isOpen = true;
 };
 
-var close = function close() {
+var close = function close($btn, $nav) {
   $btn.removeClass('is-open').addClass('is-close');
 
   $nav.removeClass('is-open');
@@ -289,8 +292,12 @@ var close = function close() {
   isOpen = false;
 };
 
-var handleClickHashLink = function handleClickHashLink() {
-  return isOpen && close();
+var handleClickToggleBtn = function handleClickToggleBtn($btn, $nav) {
+  return isOpen ? close($btn, $nav) : open($btn, $nav);
+};
+
+var handleClickHashLink = function handleClickHashLink($btn, $nav) {
+  return isOpen && close($btn, $nav);
 };
 
 },{"jquery":197}],6:[function(require,module,exports){

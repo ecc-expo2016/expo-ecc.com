@@ -1,11 +1,9 @@
 'use strict';
 import $ from 'jquery';
 
-const $btn = $('.header__btn');
-const $nav = $('.nav');
 let isOpen = false;
 
-const open = () => {
+const open = ($btn, $nav) => {
   $btn
     .removeClass('is-close')
     .addClass('is-open');
@@ -15,7 +13,7 @@ const open = () => {
   isOpen = true;
 };
 
-const close = () => {
+const close = ($btn, $nav) => {
   $btn
     .removeClass('is-open')
     .addClass('is-close');
@@ -25,11 +23,16 @@ const close = () => {
   isOpen = false;
 };
 
-const handleClickHashLink = () => isOpen && close();
+const handleClickToggleBtn = ($btn, $nav) =>
+  isOpen ? close($btn, $nav) : open($btn, $nav);
+
+const handleClickHashLink = ($btn, $nav) => isOpen && close($btn, $nav);
 
 export default function () {
-  $btn.on('click', () => isOpen ? close() : open());
+  const $btn = $('.header__btn');
+  const $nav = $('.nav');
+  $btn.on('click', handleClickToggleBtn.bind(null, $btn, $nav));
 
   const $hashLink = $('a[href^="#"]');
-  $hashLink.on('click', handleClickHashLink);
+  $hashLink.on('click', handleClickHashLink.bind(null, $btn, $nav));
 }

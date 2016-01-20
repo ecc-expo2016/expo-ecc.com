@@ -2,15 +2,11 @@
 import $ from 'jquery';
 import throttle from 'lodash.throttle';
 
-const $scrollElement = $('html, body');
 const duration = 800;
 let prevHash;
 let throttled;
 
-const handleClickHashLink = function (evt) {
-  evt.preventDefault();
-  const hash = $(this).attr('href').slice(1);
-
+const scrollToHash = (hash, $scrollElement) => {
   if (hash !== prevHash) {
     let scrolling;
 
@@ -30,6 +26,15 @@ const handleClickHashLink = function (evt) {
 };
 
 export default function () {
+  const $scrollElement = $('html, body');
+
+  const handleClickHashLink = function (evt) {
+    evt.preventDefault();
+
+    const hash = $(this).attr('href').slice(1);
+    scrollToHash(hash, $scrollElement);
+  };
+
   const $hashLink = $('a[href^="#"]');
   $hashLink.on('click', handleClickHashLink);
 }
