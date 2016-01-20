@@ -1,0 +1,37 @@
+.access {
+  &__title {
+    font-size: 1.2rem;
+  }
+
+  &__address {
+    margin-top: 1em;
+  }
+
+  &__traffic {
+    margin-top: 1em;
+
+    dl {
+      display: flex;
+    }
+
+    dt {
+      position: relative;
+      flex-basis: 6em;
+      padding-right: 1em;
+
+      &::after {
+        content: "：";
+        position: absolute;
+        right: 0;
+      }
+    }
+
+    dd {
+      flex-basis: calc(100% - 7em);
+    }
+  }
+
+  &__map {
+    max-width: 640px;
+  }
+}

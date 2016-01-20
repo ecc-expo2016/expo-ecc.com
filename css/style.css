@@ -251,6 +251,22 @@ img {
 .container {
   max-width: 1140px; }
 
+.comming {
+  position: relative;
+  width: 100%; }
+  .comming::before {
+    content: '';
+    display: block;
+    padding-top: 60%; }
+  .comming::after {
+    content: 'Comming Soon...';
+    position: absolute;
+    right: 50%;
+    bottom: 50%;
+    transform: translate(50%, 50%);
+    font-size: 1.4rem;
+    white-space: nowrap; }
+
 .header {
   position: fixed;
   top: 0;
@@ -486,28 +502,41 @@ img {
     .exhibit li:nth-child(even) {
       margin-left: .5rem; }
     .exhibit li:not(:nth-child(-n+2)) {
-      margin-top: 1rem; }
-  .exhibit__panel {
+      margin-top: 2rem; }
+  .exhibit-panel {
     position: relative;
-    margin-right: auto;
-    margin-left: auto;
     max-width: 250px;
-    text-align: center;
-    background-color: #333; }
-    .exhibit__panel::before {
+    margin-right: auto;
+    margin-left: auto; }
+    .exhibit-panel::before {
       content: "";
       display: block;
       padding-top: 100%; }
-  .exhibit__title {
-    position: absolute;
-    right: 50%;
-    bottom: 50%;
-    transform: translate(50%, 50%);
-    font-size: 1.2rem;
-    white-space: nowrap; }
-    .exhibit__title small {
-      display: block;
-      font-size: .6em; }
+    .exhibit-panel__bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%; }
+    .exhibit-panel__clipped {
+      clip-path: url("../#hexagon"); }
+    .exhibit-panel__overlay {
+      fill: rgba(51, 51, 51, 0.8);
+      transition: opacity .5s; }
+      .exhibit-panel__overlay:hover {
+        opacity: 0; }
+    .exhibit-panel__name {
+      position: absolute;
+      right: 50%;
+      bottom: 50%;
+      transform: translate(50%, 50%);
+      font-size: 1.2rem;
+      text-align: center;
+      white-space: nowrap;
+      pointer-events: none; }
+      .exhibit-panel__name small {
+        display: block;
+        font-size: .6em; }
 
 .footer {
   margin-top: 4rem;

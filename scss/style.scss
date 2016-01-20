@@ -80,9 +80,32 @@ img {
   max-width: $break-point;
 }
 
+.comming {
+  position: relative;
+  width: 100%;
+
+  &::before {
+    content: '';
+    display: block;
+    padding-top: 60%;
+  }
+
+  &::after {
+    content: 'Comming Soon...';
+    position: absolute;
+    right: 50%;
+    bottom: 50%;
+    transform: translate(50%,50%);
+    font-size: 1.4rem;
+    white-space: nowrap;
+  }
+}
+
 @import 'header';
 @import 'nav';
 @import 'symbol';
 @import 'hero';
 @import 'section';
+@import 'access';
+@import 'exhibit';
 @import 'footer';
