@@ -2,9 +2,11 @@
 
 $break-point: 1140px;
 
-$brand-bg: #c1c0be;
 $black: #444;
 $white: #fff;
+
+$brand-bg: #c1c0be;
+$brand-blue: #00b7ee;
 
 @font-face {
   font-family: 'Muli';
@@ -50,6 +52,10 @@ button {
 img {
   max-width: 100%;
   height: auto;
+}
+
+.mt0 {
+  margin-top: 0 !important;
 }
 
 .mt2em {

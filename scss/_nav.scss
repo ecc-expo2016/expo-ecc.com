@@ -63,10 +63,10 @@
 
       @media (min-width: $break-point) {
         padding: 1em 1em 1em calc(1em + 1px);
-        transition: background-color .5s;
+        transition: color .5s;
 
         &:hover {
-          background-color: rgba($black,.8);
+          color: $brand-blue;
         }
       }
 
@@ -88,6 +88,10 @@
 
       @media (min-width: $break-point) {
         display: none;
+      }
+
+      + .icon {
+        margin-left: .4em;
       }
     }
   }
