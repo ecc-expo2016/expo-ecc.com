@@ -81,7 +81,17 @@
     right: 2%;
     font-size: 5vw;
     transform-origin: left center;
-    animation: swing 2s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+    animation: fade-in 5s,
+      swing 2s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 
