@@ -8,6 +8,7 @@ import toggleToTopBtn from './toggleToTopBtn';
 import toggleExhibitMask from './toggleExhibitMask';
 import smoothScroll from './smoothScroll';
 import share from './share';
+import developerMessage from './developerMessage';
 
 const init = () => {
   new Symbol(document.querySelector('.symbol'));
@@ -17,6 +18,7 @@ const init = () => {
   toggleExhibitMask();
   smoothScroll();
   share();
+  developerMessage();
 };
 
 if (document.readyState === 'loading') {
