@@ -206,7 +206,8 @@ textarea {
   src: url("/font/icon.woff") format("woff"); }
 
 .icon {
-  font-family: 'icon'; }
+  font-family: 'icon';
+  font-size: .8em; }
 
 body {
   font-family: '游ゴシック体', 'Yu Gothic', YuGothic, sans-serif;
@@ -399,7 +400,10 @@ img {
       text-decoration: none; }
       @media (min-width: 1140px) {
         .nav__list a {
-          padding: 1em 1em 1em calc(1em + 1px); } }
+          padding: 1em 1em 1em calc(1em + 1px);
+          transition: background-color .5s; }
+          .nav__list a:hover {
+            background-color: rgba(68, 68, 68, 0.8); } }
       .nav__list a::after {
         content: '>';
         position: absolute;
@@ -459,9 +463,15 @@ img {
     align-self: flex-end; }
   .hero__date {
     font-size: 1.5rem; }
+    @media (min-width: 1140px) {
+      .hero__date {
+        font-size: 2rem; } }
   .hero__place {
     margin-top: -.2em;
     font-size: 1.2rem; }
+    @media (min-width: 1140px) {
+      .hero__place {
+        font-size: 1.5rem; } }
   .hero__footer {
     display: none;
     align-items: flex-end;
@@ -535,7 +545,7 @@ img {
     .section__headline small {
       display: block;
       margin-top: -.6em;
-      font-size: 1rem; }
+      font-size: 1.2rem; }
   .section__content {
     margin-top: 1rem;
     padding: 2rem;
@@ -549,7 +559,7 @@ img {
     margin-top: .5em;
     margin-bottom: .5em;
     font-weight: normal;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     color: #00b7ee; }
   .section__dl {
     display: flex;
@@ -646,7 +656,8 @@ img {
       font-size: .8rem;
       text-align: center;
       white-space: nowrap;
-      pointer-events: none; }
+      pointer-events: none;
+      transition: opacity .5s; }
       @media (min-width: 30rem) {
         .exhibit-panel__name {
           font-size: 1rem; } }

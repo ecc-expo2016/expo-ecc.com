@@ -5,6 +5,7 @@ import Symbol from './symbol';
 import toggleNavigation from './toggleNavigation';
 import currentNavigation from './currentNavigation';
 import toggleToTopBtn from './toggleToTopBtn';
+import toggleExhibitMask from './toggleExhibitMask';
 import smoothScroll from './smoothScroll';
 import share from './share';
 
@@ -13,6 +14,7 @@ const init = () => {
   toggleNavigation();
   currentNavigation();
   toggleToTopBtn();
+  toggleExhibitMask();
   smoothScroll();
   share();
 };

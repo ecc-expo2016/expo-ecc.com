@@ -87,6 +87,7 @@
       text-align: center;
       white-space: nowrap;
       pointer-events: none;
+      transition: opacity .5s;
 
       @media (min-width: 30rem) {
         font-size: 1rem;

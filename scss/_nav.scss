@@ -63,6 +63,11 @@
 
       @media (min-width: $break-point) {
         padding: 1em 1em 1em calc(1em + 1px);
+        transition: background-color .5s;
+
+        &:hover {
+          background-color: rgba($black,.8);
+        }
       }
 
       &::after {
