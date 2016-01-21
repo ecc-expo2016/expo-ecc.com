@@ -19,8 +19,7 @@ const toggleToTopButton = debounce($btn => {
 }, 300);
 
 export default function () {
-  const $btn = $('.to-top');
-  const fn = toggleToTopButton.bind(null, $btn);
+  const fn = toggleToTopButton.bind(null, $('.to-top'));
 
   fn();
 

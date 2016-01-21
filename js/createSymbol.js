@@ -6,7 +6,7 @@ import sample from 'lodash.sample';
 import times from 'lodash.times';
 import debounce from 'lodash.debounce';
 
-export default class Symbol {
+class Symbol {
   constructor(container) {
     this.container = container;
     this.renderer = new PIXI.autoDetectRenderer(undefined, undefined, {
@@ -82,4 +82,8 @@ export default class Symbol {
       .onComplete(() => this.stage.removeChild(piece))
       .start();
   };
+}
+
+export default function () {
+  new Symbol(document.querySelector('.symbol'));
 }

@@ -3,27 +3,26 @@ import $ from 'jquery';
 
 const className = 'exhibit-panel';
 
-const hideName = function ($overlay) {
-  const $name = $(this)
-    .closest(`.${className}`)
-    .find(`.${className}__name`);
-
+const hideName = $name => {
   $name.css('opacity', 0);
 };
 
-const showName = function ($overlay) {
-  const $name = $(this)
-    .closest(`.${className}`)
-    .find(`.${className}__name`);
-
+const showName = $name => {
   $name.css('opacity', 1);
 };
 
 export default function () {
-  const $overlay = $(`.${className}__overlay`);
+  const $overlays = $(`.${className}__overlay`);
 
-  $overlay.on({
-    mouseenter: hideName,
-    mouseleave: showName
-  });
+  for (const overlay of $overlays) {
+    const $overlay = $(overlay);
+    const $name = $overlay
+      .closest(`.${className}`)
+      .find(`.${className}__name`);
+
+    $overlay.on({
+      mouseenter: hideName.bind(null, $name),
+      mouseleave: showName.bind(null, $name)
+    });
+  }
 }

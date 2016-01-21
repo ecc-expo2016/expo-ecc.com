@@ -6,7 +6,9 @@ const duration = 800;
 let prevHash;
 let throttled;
 
-const scrollToHash = (hash, $scrollElement) => {
+const scrollToHash = (hash, $scrollElement, evt) => {
+  evt.preventDefault();
+
   if (hash !== prevHash) {
     let scrolling;
 
@@ -27,14 +29,11 @@ const scrollToHash = (hash, $scrollElement) => {
 
 export default function () {
   const $scrollElement = $('html, body');
+  const $hashLinks = $('a[href^="#"]');
 
-  const handleClickHashLink = function (evt) {
-    evt.preventDefault();
-
-    const hash = $(this).attr('href').slice(1);
-    scrollToHash(hash, $scrollElement);
-  };
-
-  const $hashLink = $('a[href^="#"]');
-  $hashLink.on('click', handleClickHashLink);
+  for (const hashLink of $hashLinks) {
+    const $hashLink = $(hashLink);
+    const hash = $hashLink.attr('href').slice(1);
+    $hashLink.on('click', scrollToHash.bind(null, hash, $scrollElement));
+  }
 }

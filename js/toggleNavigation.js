@@ -23,19 +23,18 @@ let close = ($btn, $nav) => {
   isOpen = false;
 };
 
-const handleClickToggleBtn = () => isOpen ? close() : open();
+const toggleNavigation = () => isOpen ? close() : open();
 
-const handleClickHashLink = () => isOpen && close();
+const closeNavigation = () => isOpen && close();
 
 export default function () {
   const $btn = $('.header__btn');
   const $nav = $('.nav');
-
   open = open.bind(null, $btn, $nav);
   close = close.bind(null, $btn, $nav);
 
-  $btn.on('click', handleClickToggleBtn);
+  $btn.on('click', toggleNavigation);
 
   const $hashLink = $('a[href^="#"]');
-  $hashLink.on('click', handleClickHashLink);
+  $hashLink.on('click', closeNavigation);
 }

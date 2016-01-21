@@ -1,23 +1,23 @@
 'use strict';
-import 'babel-polyfill';
 import 'picturefill';
-import Symbol from './symbol';
+import 'babel-polyfill';
+import createSymbol from './createSymbol';
 import toggleNavigation from './toggleNavigation';
-import currentNavigation from './currentNavigation';
-import toggleToTopBtn from './toggleToTopBtn';
+import indicateActiveNavigation from './indicateActiveNavigation';
+import scrollSmoothly from './scrollSmoothly';
+import shareToSocial from './shareToSocial';
+import toggleToTopButton from './toggleToTopButton';
 import toggleExhibitMask from './toggleExhibitMask';
-import smoothScroll from './smoothScroll';
-import share from './share';
 import developerMessage from './developerMessage';
 
 const init = () => {
-  new Symbol(document.querySelector('.symbol'));
+  createSymbol();
   toggleNavigation();
-  currentNavigation();
-  toggleToTopBtn();
+  indicateActiveNavigation();
+  scrollSmoothly();
+  shareToSocial();
+  toggleToTopButton();
   toggleExhibitMask();
-  smoothScroll();
-  share();
   developerMessage();
 };
 

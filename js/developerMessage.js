@@ -14,8 +14,8 @@ export default function () {
     );
   }
 
-  console.log(
-    'All of source code is here !' + '\n' +
+  console.log([
+    'All of source code is here !',
     'https://github.com/ecc-expo2016/expo-ecc.com'
-  );
+  ].join('\n'));
 }

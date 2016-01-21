@@ -4,7 +4,7 @@ import debounce from 'lodash.debounce';
 
 const $window = $(window);
 
-const currentNavigation = debounce(($sections, $navBg, $navContent) => {
+const moveToActiveNavigation = debounce(($sections, $navBg, $navContent) => {
   const baseLine = $window.scrollTop() + $window.height() / 2;
   $navBg.css('opacity', 0);
 
@@ -32,7 +32,7 @@ export default function () {
   const $sections = $('.section');
   const $navBg = $('.nav__bg');
   const $navContent = $('.nav__list');
-  const fn = currentNavigation.bind(null, $sections, $navBg, $navContent);
+  const fn = moveToActiveNavigation.bind(null, $sections, $navBg, $navContent);
 
   fn();
 
