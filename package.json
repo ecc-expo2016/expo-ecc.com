@@ -8,7 +8,7 @@
     "watch": "npm run css:watch & npm run js:watch",
     "build": "npm run css:build & npm run js:build",
     "css:watch": "node-sass -w scss/style.scss -o css",
-    "css:build": "node-sass scss/style.scss | postcss -u autoprefixer --autoprefixer.browsers 'last 2 versions' -u cssnano -o css/style.css",
+    "css:build": "node-sass scss/style.scss | postcss -u autoprefixer --autoprefixer.browsers 'last 2 versions' -u cssnano -o css/style.css && node removePrefix",
     "js:watch": "watchify js/main.js -o js/bundle.js -v",
     "js:build": "browserify js/main.js | uglifyjs -cm > js/bundle.js"
   },
