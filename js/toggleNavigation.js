@@ -3,7 +3,7 @@ import $ from 'jquery';
 
 let isOpen = false;
 
-const open = ($btn, $nav) => {
+let open = ($btn, $nav) => {
   $btn
     .removeClass('is-close')
     .addClass('is-open');
@@ -13,7 +13,7 @@ const open = ($btn, $nav) => {
   isOpen = true;
 };
 
-const close = ($btn, $nav) => {
+let close = ($btn, $nav) => {
   $btn
     .removeClass('is-open')
     .addClass('is-close');
@@ -23,16 +23,19 @@ const close = ($btn, $nav) => {
   isOpen = false;
 };
 
-const handleClickToggleBtn = ($btn, $nav) =>
-  isOpen ? close($btn, $nav) : open($btn, $nav);
+const handleClickToggleBtn = () => isOpen ? close() : open();
 
-const handleClickHashLink = ($btn, $nav) => isOpen && close($btn, $nav);
+const handleClickHashLink = () => isOpen && close();
 
 export default function () {
   const $btn = $('.header__btn');
   const $nav = $('.nav');
-  $btn.on('click', handleClickToggleBtn.bind(null, $btn, $nav));
+
+  open = open.bind(null, $btn, $nav);
+  close = close.bind(null, $btn, $nav);
+
+  $btn.on('click', handleClickToggleBtn);
 
   const $hashLink = $('a[href^="#"]');
-  $hashLink.on('click', handleClickHashLink.bind(null, $btn, $nav));
+  $hashLink.on('click', handleClickHashLink);
 }

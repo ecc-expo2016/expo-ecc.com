@@ -30,6 +30,7 @@
     "lodash.sample": "^4.0.0",
     "lodash.throttle": "^4.0.0",
     "lodash.times": "^4.0.0",
+    "picturefill": "^3.0.1",
     "pixi.js": "^3.0.9",
     "sanitize.css": "^3.0.0",
     "tween.js": "16.3.1"

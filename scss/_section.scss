@@ -2,12 +2,24 @@
   display: flex;
   flex-direction: column;
 
+  @media (min-width: $break-point) {
+    flex-direction: row-reverse;
+    align-items: center;
+  }
+
   &__headline {
     margin-top: 4rem;
     margin-bottom: 1rem;
     font-weight: normal;
     font-size: 4rem;
     text-align: center;
+
+    @media (min-width: $break-point) {
+      margin-top: 0;
+      margin-bottom: 0;
+      flex: 2;
+      font-size: 5rem;
+    }
 
     span {
       font-family: Muli, sans-serif;
@@ -22,8 +34,14 @@
 
   &__content {
     margin-top: 1rem;
-    padding: 1rem;
+    padding: 2rem;
     background-color: rgba($black,.8);
+
+    @media (min-width: $break-point) {
+      margin-top: 5rem;
+      margin-bottom: 5rem;
+      flex: 4;
+    }
   }
 
   &__title {
@@ -43,7 +61,7 @@
       flex-basis: 5em;
 
       &::after {
-        content: "：";
+        content: '：';
         position: absolute;
         right: 0;
       }

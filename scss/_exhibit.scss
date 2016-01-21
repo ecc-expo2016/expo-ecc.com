@@ -1,4 +1,6 @@
 .exhibit {
+  $break-point: 800px;
+
   display: flex;
   flex-wrap: wrap;
   list-style: none;
@@ -6,16 +8,39 @@
   li {
     flex-basis: calc(50% - .5rem);
 
+    @media (min-width: $break-point) {
+      // 1px for IE
+      flex-basis: calc(100% / 3 - 1px);
+    }
+
     &:nth-child(odd) {
       margin-right: .5rem;
+
+      @media (min-width: $break-point) {
+        margin-right: 0;
+      }
     }
 
     &:nth-child(even) {
       margin-left: .5rem;
+
+      @media (min-width: $break-point) {
+        margin-left: 0;
+      }
     }
 
     &:not(:nth-child(-n+2)) {
       margin-top: 2rem;
+
+      @media (min-width: $break-point) {
+        margin-top: 0;
+      }
+    }
+
+    @media (min-width: $break-point) {
+      &:not(:nth-child(-n+3)) {
+        margin-top: 2rem;
+      }
     }
   }
 
@@ -40,7 +65,8 @@
     }
 
     &__clipped {
-      clip-path: url('../#hexagon');
+      // firefoxのためハッシュの前にインラインSVGが埋め込まれているファイルまでのパスを指定
+      clip-path: url('/#hexagon');
     }
 
     &__overlay {
@@ -57,10 +83,18 @@
       right: 50%;
       bottom: 50%;
       transform: translate(50%,50%);
-      font-size: 1.2rem;
+      font-size: .8rem;
       text-align: center;
       white-space: nowrap;
       pointer-events: none;
+
+      @media (min-width: 30rem) {
+        font-size: 1rem;
+      }
+
+      @media (min-width: 35rem) {
+        font-size: 1.2rem;
+      }
 
       small {
         display: block;

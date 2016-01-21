@@ -1,11 +1,11 @@
 .hero {
   position: relative;
-  display: flex;
   min-height: 100vh;
-  padding: 1rem;
 
   &__content {
-    width: 100%;
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
     align-self: flex-end;
   }
 
@@ -18,19 +18,52 @@
     font-size: 1.2rem;
   }
 
-  &__logo {
+  &__footer {
     display: none;
+    align-items: flex-end;
+    margin-top: 1rem;
 
     @media (min-width: $break-point) {
-      display: block;
+      display: flex;
+    }
+  }
+
+  &__logo {
+    display: none;
+    margin-right: 2rem;
+
+    @media (min-width: $break-point) {
+      display: inline-block;
+    }
+
+    &--sp {
+      position: absolute;
+      right: 50%;
+      bottom: 50%;
+      width: 90%;
+      transform: translate(50%,50%);
+      text-align: center;
+
+      @media (min-width: $break-point) {
+        display: none;
+      }
     }
   }
 
   &__social {
     display: none;
+    list-style: none;
+
+    li {
+      display: inline-block;
+
+      &:not(:first-child) {
+        margin-left: .5rem;
+      }
+    }
 
     @media (min-width: $break-point) {
-      display: block;
+      display: inline-block;
     }
   }
 

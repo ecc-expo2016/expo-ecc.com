@@ -16,14 +16,13 @@ export default class Symbol {
     this.stage = new PIXI.Container();
     this.colors = [0x00a0e9, 0xcd2f60, 0xfff100, 0xffffff, 0xffffff];
     this.container.appendChild(this.renderer.view);
-    this.adjustSize = debounce(this.adjustSize, 100);
 
     this.adjustSize();
     this.animate();
 
     window.addEventListener('resize', this.adjustSize);
   }
-  adjustSize = () => {
+  adjustSize = debounce(() => {
     this.width = this.container.offsetWidth;
     this.height = this.container.offsetHeight;
     this.symbolRadius = Math.min(this.width, this.height) * 0.4;
@@ -31,7 +30,7 @@ export default class Symbol {
       Math.min(this.width * this.height / 10000, 80), 40
     );
     this.renderer.resize(this.width, this.height);
-  };
+  }, 100);
   animate = () => {
     times(3, this.createPiece);
     TWEEN.update();
