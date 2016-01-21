@@ -23,7 +23,7 @@ const currentNavigation = debounce(($sections, $navBg, $navContent) => {
         transform: `translate(${left}px,0)`,
         opacity: 1
       });
-      return false;
+      break;
     }
   }
 }, 24);
