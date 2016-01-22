@@ -48,7 +48,7 @@
       position: absolute;
       right: 50%;
       bottom: 50%;
-      width: 90%;
+      width: calc(100% - 4rem);
       transform: translate(50%,50%);
       text-align: center;
 
