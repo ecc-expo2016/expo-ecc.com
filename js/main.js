@@ -1,6 +1,7 @@
 'use strict';
 import 'picturefill';
 import 'babel-polyfill';
+import $ from 'jquery';
 import createSymbol from './createSymbol';
 import toggleNavigation from './toggleNavigation';
 import indicateActiveNavigation from './indicateActiveNavigation';
