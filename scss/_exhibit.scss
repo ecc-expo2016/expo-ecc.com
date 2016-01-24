@@ -72,10 +72,6 @@
     &__overlay {
       fill: rgba(#333,.8);
       transition: opacity .5s;
-
-      &:hover {
-        opacity: 0;
-      }
     }
 
     &__name {

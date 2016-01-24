@@ -3,11 +3,13 @@ import $ from 'jquery';
 
 const className = 'exhibit-panel';
 
-const hideName = $name => {
+const hideMask = ($overlay, $name) => {
+  $overlay.css('opacity', 0);
   $name.css('opacity', 0);
 };
 
-const showName = $name => {
+const showMask = ($overlay, $name) => {
+  $overlay.css('opacity', 1);
   $name.css('opacity', 1);
 };
 
@@ -21,8 +23,8 @@ export default function () {
       .find(`.${className}__name`);
 
     $overlay.on({
-      mouseenter: hideName.bind(null, $name),
-      mouseleave: showName.bind(null, $name)
+      mouseenter: hideMask.bind(null, $overlay, $name),
+      mouseleave: showMask.bind(null, $overlay, $name)
     });
   }
 }
