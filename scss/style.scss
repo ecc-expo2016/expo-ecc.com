@@ -66,6 +66,10 @@ img {
   text-shadow: 0 0 10px $black;
 }
 
+.freeze {
+  overflow: hidden;
+}
+
 .twitter,
 .facebook {
   width: 48px;
@@ -117,4 +121,5 @@ img {
 @import 'section';
 @import 'access';
 @import 'exhibit';
+@import 'gallery';
 @import 'footer';

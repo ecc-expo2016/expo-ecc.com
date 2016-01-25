@@ -9,6 +9,8 @@ import scrollSmoothly from './scrollSmoothly';
 import shareToSocial from './shareToSocial';
 import toggleToTopButton from './toggleToTopButton';
 import toggleExhibitMask from './toggleExhibitMask';
+import photoGallery from './photoGallery';
+import fixFlexbox from './fixFlexbox';
 import developerMessage from './developerMessage';
 
 const init = () => {
@@ -19,6 +21,8 @@ const init = () => {
   shareToSocial();
   toggleToTopButton();
   toggleExhibitMask();
+  photoGallery();
+  fixFlexbox();
   developerMessage();
 };
 

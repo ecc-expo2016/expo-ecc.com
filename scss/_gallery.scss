@@ -1,0 +1,140 @@
+.gallery {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  list-style: none;
+
+  @media (min-width: 40rem) {
+    flex-direction: row;
+  }
+
+  &__item {
+    &:not(:first-child) {
+      margin-top: 2rem;
+    }
+
+    &:nth-child(2) {
+      @media (min-width: 40rem) {
+        margin-top: 0;
+      }
+    }
+
+    &:nth-child(3) {
+      @media (min-width: $break-point) {
+        margin-top: 0;
+      }
+    }
+
+    &:nth-child(even) {
+      @media (min-width: 40rem) {
+        margin-left: 2rem;
+      }
+
+      @media (min-width: $break-point) {
+        margin-left: 0;
+      }
+    }
+
+    &:not(:nth-child(3n+1)) {
+      @media (min-width: $break-point) {
+        margin-left: 2rem;
+      }
+    }
+
+    @media (min-width: 40rem) {
+      flex-basis: calc(50% - 1rem);
+    }
+
+    @media (min-width: $break-point) {
+      flex-basis: calc((100% - 4rem) / 3);
+    }
+  }
+
+  &__img {
+    // for Firefox
+    width: 100%;
+
+    cursor: pointer;
+  }
+
+  &-fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .5s;
+
+    &.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    &__bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background-color: $black;
+      cursor: pointer;
+    }
+
+    &__img {
+      position: absolute;
+      right: 50%;
+      bottom: 50%;
+      z-index: -1;
+      transform: translate(50%,50%);
+      pointer-events: none;
+    }
+
+    &__nav {
+      list-style: none;
+    }
+
+    &__btn {
+      position: absolute;
+      top: 0;
+      width: 3rem;
+      height: 100%;
+      transition: opacity .3s;
+
+      &::before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-position: center center;
+        background-repeat: no-repeat;
+      }
+
+      &.is-hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+
+    &__next {
+      right: 0;
+      cursor: e-resize;
+
+      &::before {
+        background-image: url('/img/next.svg');
+      }
+    }
+
+    &__prev {
+      left: 0;
+      cursor: w-resize;
+
+      &::before {
+        background-image: url('/img/prev.svg');
+      }
+    }
+  }
+}
