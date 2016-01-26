@@ -28,7 +28,8 @@ const classNames = {
     img: 'gallery-fullscreen__img',
     bg: 'gallery-fullscreen__bg',
     next: 'gallery-fullscreen__next',
-    prev: 'gallery-fullscreen__prev'
+    prev: 'gallery-fullscreen__prev',
+    shown: 'is-shown'
   }
 };
 
@@ -46,20 +47,19 @@ const createPhotoElements = $gallery => {
 };
 
 const toggleButton = index => {
-  const className = 'is-hidden';
-  $next.removeClass(className);
-  $prev.removeClass(className);
-
   const isFirst = index === 0;
-
-  if (isFirst) {
-    return $prev.addClass(className);
-  }
-
   const isEnd = index === photos.length - 1;
 
+  if (isFirst) {
+    $prev.removeClass(classNames.fs.shown);
+  } else {
+    $prev.addClass(classNames.fs.shown);
+  }
+
   if (isEnd) {
-    $next.addClass(className);
+    $next.removeClass(classNames.fs.shown);
+  } else {
+    $next.addClass(classNames.fs.shown);
   }
 };
 
@@ -100,6 +100,8 @@ const closeImage = async () => {
   if (isOpen) {
     $html.removeClass('freeze');
     $fullscreen.removeClass('is-open');
+    $next.removeClass(classNames.fs.shown);
+    $prev.removeClass(classNames.fs.shown);
 
     await new Promise(done => $fullscreen.on('transitionend', done));
     $fullscreen.find(`.${classNames.fs.img}`).remove();
