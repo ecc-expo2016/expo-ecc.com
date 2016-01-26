@@ -54,8 +54,12 @@
     // for Firefox
     width: 100%;
 
-    cursor: pointer;
-    cursor: zoom-in;
+    cursor: wait;
+
+    &.is-loaded {
+      cursor: pointer;
+      cursor: zoom-in;
+    }
   }
 
   &-fullscreen {

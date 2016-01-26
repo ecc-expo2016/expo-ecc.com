@@ -128,19 +128,23 @@ const handleKeyDown = evt => {
   }
 };
 
-export default function () {
+export default async function () {
   const $gallery = $('.gallery');
   createPhotoElements($gallery);
+
+  const $imgs = $gallery.find('img');
+
+  await Promise.all([...$imgs].map(img => {
+    return new Promise(done => $(img).on('load', done));
+  }));
 
   $fullscreen = $(`.${classNames.fs.root}`);
   $next = $fullscreen.find(`.${classNames.fs.next}`);
   $prev = $fullscreen.find(`.${classNames.fs.prev}`);
 
-  const $imgs = $gallery.find('img');
-
   for (const img of $imgs) {
     const $img = $(img);
-    $img.on('click', zoomImage.bind(null, $img));
+    $img.on('click', zoomImage.bind(null, $img)).addClass('is-loaded');
   }
 
   $next.on('click', changeImage.bind(null, 1));
