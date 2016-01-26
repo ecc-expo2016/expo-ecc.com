@@ -8,14 +8,18 @@
 const fs = require('fs');
 
 const filePath = 'css/style.css';
-const pattern = '-webkit-clip-path:url(/#hexagon);';
+const pattern = /\n? *-webkit-clip-path: ?url\("?\/#[a-zA-Z_\-]*"?\);?/g;
 
-fs.readFile(filePath, 'utf8', (err, data) => {
-  if (err) {throw err;}
-  const newData = data.replace(pattern, '');
+process.stdin.resume();
+process.stdin.setEncoding('utf8');
 
-  fs.writeFile(filePath, newData, err => {
-    if (err) {throw err;}
-    console.log(`Succeeded to remove \`-webkit-clip-path\` from ${filePath} !`);
+new Promise(done => {
+  let data = '';
+  process.stdin.on('data', chunk => data += chunk);
+  process.stdin.on('end', () => done(data));
+})
+  .then(data => Promise.resolve(data.replace(pattern, '')))
+  .then(data => {
+    fs.writeFileSync(filePath, data, 'utf8');
+    console.log(`Succeeded to remove \`-webkit-clip-path\``);
   });
-});
