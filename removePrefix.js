@@ -18,7 +18,7 @@ new Promise(done => {
   process.stdin.on('data', chunk => data += chunk);
   process.stdin.on('end', () => done(data));
 })
-  .then(data => Promise.resolve(data.replace(pattern, '')))
+  .then(data => data.replace(pattern, ''))
   .then(data => {
     fs.writeFileSync(filePath, data, 'utf8');
     console.log(`Succeeded to remove \`-webkit-clip-path\``);
