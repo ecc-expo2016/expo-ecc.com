@@ -106,17 +106,19 @@ const changeImage = count => {
   if (isOpen) {
     const $img = $fullscreen.find(`.${classNames.fs.img}`);
     const index = $img.data('index');
-    let newIndex = index + count;
+    const newIndex = index + count;
 
     const isFirst = newIndex === -1;
     const isEnd = newIndex === photos.length;
 
     if (isFirst || isEnd) {return;}
 
-    const {original} = photos[newIndex];
     if (!isLoaded) {
       $img.attr('src', '');
     }
+
+    const {original} = photos[newIndex];
+
     $img.attr('src', original).data('index', newIndex);
     toggleButton(newIndex);
   }
