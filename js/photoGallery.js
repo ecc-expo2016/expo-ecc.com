@@ -10,29 +10,29 @@ let isOpen = false;
 
 const photos = [
   {
-    thumbnail: '/img/gallery_01.png',
-    original: '/img/gallery_01_large.png'
+    thumbnail: '/img/gallery_01_thumbnail.png',
+    original: '/img/gallery_01.png'
   }, {
-    thumbnail: '/img/gallery_02.png',
-    original: '/img/gallery_02_large.png'
+    thumbnail: '/img/gallery_02_thumbnail.png',
+    original: '/img/gallery_02.png'
   }, {
-    thumbnail: '/img/gallery_03.png',
-    original: '/img/gallery_03_large.png'
+    thumbnail: '/img/gallery_03_thumbnail.png',
+    original: '/img/gallery_03.png'
   }, {
-    thumbnail: '/img/gallery_04.png',
-    original: '/img/gallery_04_large.png'
+    thumbnail: '/img/gallery_04_thumbnail.png',
+    original: '/img/gallery_04.png'
   }, {
-    thumbnail: '/img/gallery_05.png',
-    original: '/img/gallery_05_large.png'
+    thumbnail: '/img/gallery_05_thumbnail.png',
+    original: '/img/gallery_05.png'
   }, {
-    thumbnail: '/img/gallery_06.png',
-    original: '/img/gallery_06_large.png'
+    thumbnail: '/img/gallery_06_thumbnail.png',
+    original: '/img/gallery_06.png'
   }, {
-    thumbnail: '/img/gallery_07.png',
-    original: '/img/gallery_07_large.png'
+    thumbnail: '/img/gallery_07_thumbnail.png',
+    original: '/img/gallery_07.png'
   }, {
-    thumbnail: '/img/gallery_08.png',
-    original: '/img/gallery_08_large.png'
+    thumbnail: '/img/gallery_08_thumbnail.png',
+    original: '/img/gallery_08.png'
   }
 ];
 
@@ -163,9 +163,11 @@ export default async function () {
 
   $next.on('click', changeImage.bind(null, 1));
   $prev.on('click', changeImage.bind(null, -1));
-
-  const $bg = $fullscreen.find(`.${classNames.fs.bg}`);
-  $bg.on('click', closeImage);
-
+  $fullscreen.find(`.${classNames.fs.bg}`).on('click', closeImage);
   $document.on('keydown', handleKeyDown);
+
+  // load original images to do cash
+  photos.forEach(({original}) => {
+    $('<img>').attr('src', original);
+  });
 }
