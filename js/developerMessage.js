@@ -1,6 +1,6 @@
 'use strict';
 
-const isChrome = window.navigator.userAgent.indexOf('Chrome') !== -1;
+const isChrome = window.navigator.userAgent.includes('Chrome');
 
 export default function () {
   if (isChrome) {
