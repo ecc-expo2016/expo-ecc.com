@@ -45,7 +45,7 @@
     "browserify": "^13.0.0",
     "cssnano": "^3.4.0",
     "node-sass": "^3.4.2",
-    "postcss-cli": "^2.4.0",
+    "postcss-cli": "^2.4.1",
     "uglify-js": "^2.6.1",
     "watchify": "^3.7.0"
   },

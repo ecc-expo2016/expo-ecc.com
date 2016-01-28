@@ -113,9 +113,7 @@ const changeImage = count => {
     if (isFirst || isEnd) {return;}
 
     const {original} = photos[newIndex];
-    $img
-      .attr('src', '') // reset shown image
-      .attr('src', original).data('index', newIndex);
+    $img.attr('src', original).data('index', newIndex);
     toggleButton(newIndex);
   }
 };
