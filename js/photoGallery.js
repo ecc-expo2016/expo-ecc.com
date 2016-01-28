@@ -9,14 +9,31 @@ let $prev = null;
 let isOpen = false;
 
 const photos = [
-  '/img/gallery_01.png',
-  '/img/gallery_02.png',
-  '/img/gallery_03.png',
-  '/img/gallery_04.png',
-  '/img/gallery_05.png',
-  '/img/gallery_06.png',
-  '/img/gallery_07.png',
-  '/img/gallery_08.png'
+  {
+    thumbnail: '/img/gallery_01.png',
+    original: '/img/gallery_01_large.png'
+  }, {
+    thumbnail: '/img/gallery_02.png',
+    original: '/img/gallery_02_large.png'
+  }, {
+    thumbnail: '/img/gallery_03.png',
+    original: '/img/gallery_03_large.png'
+  }, {
+    thumbnail: '/img/gallery_04.png',
+    original: '/img/gallery_04_large.png'
+  }, {
+    thumbnail: '/img/gallery_05.png',
+    original: '/img/gallery_05_large.png'
+  }, {
+    thumbnail: '/img/gallery_06.png',
+    original: '/img/gallery_06_large.png'
+  }, {
+    thumbnail: '/img/gallery_07.png',
+    original: '/img/gallery_07_large.png'
+  }, {
+    thumbnail: '/img/gallery_08.png',
+    original: '/img/gallery_08_large.png'
+  }
 ];
 
 const classNames = {
@@ -36,9 +53,9 @@ const classNames = {
 const createPhotoElements = $gallery => {
   const $documentFragment = $(document.createDocumentFragment());
 
-  photos.forEach((photo, i) => {
+  photos.forEach(({thumbnail}, i) => {
     const $img = $('<img>').addClass(classNames.img)
-      .attr('src', photo).data('index', i);
+      .attr('src', thumbnail).data('index', i);
     const $item = $('<li>').addClass(classNames.item).append($img);
     $documentFragment.append($item);
   });
@@ -68,9 +85,10 @@ const zoomImage = $img => {
     $html.addClass('freeze');
 
     const index = $img.data('index');
+    const {original} = photos[index];
     const $newImg = $('<img>')
       .addClass(classNames.fs.img)
-      .attr('src', photos[index]).data('index', index)
+      .attr('src', original).data('index', index)
       .appendTo($fullscreen);
 
     $fullscreen.addClass('is-open');
@@ -91,7 +109,8 @@ const changeImage = count => {
 
     if (isFirst || isEnd) {return;}
 
-    $img.attr('src', photos[newIndex]).data('index', newIndex);
+    const {original} = photos[newIndex];
+    $img.attr('src', original).data('index', newIndex);
     toggleButton(newIndex);
   }
 };
@@ -132,19 +151,14 @@ export default async function () {
   const $gallery = $('.gallery');
   createPhotoElements($gallery);
 
-  const $imgs = $gallery.find('img');
-
-  await Promise.all([...$imgs].map(img => {
-    return new Promise(done => $(img).on('load', done));
-  }));
-
   $fullscreen = $(`.${classNames.fs.root}`);
   $next = $fullscreen.find(`.${classNames.fs.next}`);
   $prev = $fullscreen.find(`.${classNames.fs.prev}`);
+  const $imgs = $gallery.find(`.${classNames.img}`);
 
   for (const img of $imgs) {
     const $img = $(img);
-    $img.on('click', zoomImage.bind(null, $img)).addClass('is-loaded');
+    $img.on('click', zoomImage.bind(null, $img));
   }
 
   $next.on('click', changeImage.bind(null, 1));
