@@ -1,5 +1,7 @@
 'use strict';
 import $ from 'jquery';
+import once from 'lodash.once';
+import throttle from 'lodash.throttle';
 
 const $window = $(window);
 const $document = $(document);
@@ -133,12 +135,12 @@ const closeImage = async () => {
 };
 
 const handleKeyDown = evt => {
-  const ESCAPE_KEY = 27;
+  const ESCAPE = 27;
   const ARROW_RIGHT = 39;
   const ARROW_LEFT = 37;
 
   switch (evt.keyCode) {
-    case ESCAPE_KEY:
+    case ESCAPE:
       closeImage();
       break;
     case ARROW_RIGHT:
@@ -150,11 +152,17 @@ const handleKeyDown = evt => {
   }
 };
 
-const preloadOriginalImages = () => {
+const preloadOriginalImages = once(() => {
   photos.forEach(({original}) => {
     $('<img>').attr('src', original);
   });
-};
+});
+
+const handleScroll = throttle(() => {
+  if ($window.scrollTop() > $window.height()) {
+    preloadOriginalImages();
+  }
+}, 100);
 
 export default async function () {
   const $gallery = $('.gallery');
@@ -174,5 +182,9 @@ export default async function () {
   $prev.on('click', changeImage.bind(null, -1));
   $fullscreen.find(`.${classNames.fs.bg}`).on('click', closeImage);
   $document.on('keydown', handleKeyDown);
-  $window.one('scroll', preloadOriginalImages);
+
+  $window.on({
+    scroll: handleScroll,
+    load: preloadOriginalImages
+  });
 }
