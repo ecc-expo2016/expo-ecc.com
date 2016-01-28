@@ -9,6 +9,7 @@ const $html = $('html');
 let $fullscreen = null;
 let $next = null;
 let $prev = null;
+let isLoaded = false;
 let isOpen = false;
 
 const photos = [
@@ -113,6 +114,9 @@ const changeImage = count => {
     if (isFirst || isEnd) {return;}
 
     const {original} = photos[newIndex];
+    if (!isLoaded) {
+      $img.attr('src', '');
+    }
     $img.attr('src', original).data('index', newIndex);
     toggleButton(newIndex);
   }
@@ -150,10 +154,13 @@ const handleKeyDown = evt => {
   }
 };
 
-const preloadOriginalImages = once(() => {
-  photos.forEach(({original}) => {
-    $('<img>').attr('src', original);
-  });
+const preloadOriginalImages = once(async () => {
+  await Promise.all(photos.map(({original}) => {
+    const $img = $('<img>').attr('src', original);
+    return new Promise(done => $img.on('load', done));
+  }));
+
+  isLoaded = true;
 });
 
 const handleScroll = throttle(() => {
