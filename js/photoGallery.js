@@ -158,8 +158,8 @@ const handleKeyDown = evt => {
 
 const preloadOriginalImages = once(async () => {
   await Promise.all(photos.map(({original}) => {
-    const $img = $('<img>').attr('src', original);
-    return new Promise(done => $img.on('load', done));
+    const $cache = $('<img>').attr('src', original);
+    return new Promise(done => $cache.on('load', done));
   }));
 
   isLoaded = true;

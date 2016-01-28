@@ -19,8 +19,7 @@ export default function () {
   for (const overlay of $overlays) {
     const $overlay = $(overlay);
     const $name = $overlay
-      .closest(`.${className}`)
-      .find(`.${className}__name`);
+      .closest(`.${className}`).find(`.${className}__name`);
 
     $overlay.on({
       mouseenter: hideMask.bind(null, $overlay, $name),
