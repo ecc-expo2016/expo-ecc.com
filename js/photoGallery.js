@@ -1,6 +1,7 @@
 'use strict';
 import $ from 'jquery';
 
+const $window = $(window);
 const $document = $(document);
 const $html = $('html');
 let $fullscreen = null;
@@ -147,6 +148,12 @@ const handleKeyDown = evt => {
   }
 };
 
+const preloadOriginalImages = () => {
+  photos.forEach(({original}) => {
+    $('<img>').attr('src', original);
+  });
+};
+
 export default async function () {
   const $gallery = $('.gallery');
   createPhotoElements($gallery);
@@ -165,9 +172,5 @@ export default async function () {
   $prev.on('click', changeImage.bind(null, -1));
   $fullscreen.find(`.${classNames.fs.bg}`).on('click', closeImage);
   $document.on('keydown', handleKeyDown);
-
-  // load original images to do cash
-  photos.forEach(({original}) => {
-    $('<img>').attr('src', original);
-  });
+  $window.one('scroll', preloadOriginalImages);
 }
