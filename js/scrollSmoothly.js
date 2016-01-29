@@ -20,7 +20,7 @@ const scrollToHash = (hash, $scrollElement, evt) => {
       scrolling = () => $scrollElement.animate({scrollTop}, duration);
     }
 
-    throttled = throttle(scrolling, duration);
+    throttled = throttle(scrolling, duration, {trailing: false});
     prevHash = hash;
   }
 
