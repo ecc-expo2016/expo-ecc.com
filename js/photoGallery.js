@@ -2,13 +2,10 @@
 import $ from 'jquery';
 import throttle from 'lodash.throttle';
 
-const $window = $(window);
-const $document = $(document);
 const $html = $('html');
 let $fullscreen = null;
 let $next = null;
 let $prev = null;
-let isLoaded = false;
 let isOpen = false;
 
 const photos = [
@@ -112,7 +109,7 @@ const changeImage = count => {
 
     if (isFirst || isEnd) {return;}
 
-    if (!isLoaded) {
+    if (document.readyState !== 'complete') {
       $img.attr('src', '');
     }
 
@@ -156,17 +153,24 @@ const handleKeyDown = evt => {
 };
 
 const preloadOriginalImages = async () => {
-  await Promise.all(photos.map(({original}) => {
-    const $cache = $('<img>').attr('src', original);
-    return new Promise(done => $cache.on('load', done));
-  }));
+  const $documentFragment = $(document.createDocumentFragment());
 
-  isLoaded = true;
+  photos.forEach(({original}) => {
+    const $prefetch = $('<link>').attr({
+      rel: 'prefetch',
+      link: original,
+      type: 'image/png'
+    });
+    $documentFragment.append($prefetch);
+  });
+
+  $('head').append($documentFragment);
 };
 
 export default async function () {
   const $gallery = $('.gallery');
   createPhotoElements($gallery);
+  preloadOriginalImages();
 
   $fullscreen = $(`.${classNames.fs.root}`);
   $next = $fullscreen.find(`.${classNames.fs.next}`);
@@ -181,6 +185,5 @@ export default async function () {
   $next.on('click', changeImage.bind(null, 1));
   $prev.on('click', changeImage.bind(null, -1));
   $fullscreen.find(`.${classNames.fs.bg}`).on('click', closeImage);
-  $document.on('keydown', handleKeyDown);
-  $window.on('load', preloadOriginalImages);
+  $(document).on('keydown', handleKeyDown);
 }
