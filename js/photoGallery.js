@@ -1,6 +1,5 @@
 'use strict';
 import $ from 'jquery';
-import once from 'lodash.once';
 import throttle from 'lodash.throttle';
 
 const $window = $(window);
@@ -156,20 +155,14 @@ const handleKeyDown = evt => {
   }
 };
 
-const preloadOriginalImages = once(async () => {
+const preloadOriginalImages = async () => {
   await Promise.all(photos.map(({original}) => {
     const $cache = $('<img>').attr('src', original);
     return new Promise(done => $cache.on('load', done));
   }));
 
   isLoaded = true;
-});
-
-const handleScroll = throttle(() => {
-  if ($window.scrollTop() > $window.height()) {
-    preloadOriginalImages();
-  }
-}, 100);
+};
 
 export default async function () {
   const $gallery = $('.gallery');
@@ -189,9 +182,5 @@ export default async function () {
   $prev.on('click', changeImage.bind(null, -1));
   $fullscreen.find(`.${classNames.fs.bg}`).on('click', closeImage);
   $document.on('keydown', handleKeyDown);
-
-  $window.on({
-    scroll: handleScroll,
-    load: preloadOriginalImages
-  });
+  $window.on('load', preloadOriginalImages);
 }
