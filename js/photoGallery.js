@@ -158,7 +158,7 @@ const preloadOriginalImages = async () => {
   photos.forEach(({original}) => {
     const $prefetch = $('<link>').attr({
       rel: 'prefetch',
-      link: original,
+      href: original,
       type: 'image/png'
     });
     $documentFragment.append($prefetch);
