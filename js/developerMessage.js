@@ -1,5 +1,4 @@
 'use strict';
-
 const isChrome = window.navigator.userAgent.includes('Chrome');
 
 export default function () {

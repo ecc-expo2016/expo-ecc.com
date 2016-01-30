@@ -1,39 +1,35 @@
 'use strict';
-import $ from 'jquery';
+import Jump from 'jump.js';
 import throttle from 'lodash.throttle';
 
+const jump = new Jump();
 const duration = 800;
-let prevHash;
-let throttled;
+let throttled = null;
+let prevTarget = null;
 
-const scrollToHash = (hash, $scrollElement, evt) => {
+const scrollToTarget = (target, evt) => {
   evt.preventDefault();
 
-  if (hash !== prevHash) {
-    let scrolling;
-
-    if (hash === 'top') {
-      scrolling = () => $scrollElement.animate({scrollTop: 0}, duration);
-    } else {
-      const $target = $(`#${hash}`);
-      const scrollTop = $target.offset().top;
-      scrolling = () => $scrollElement.animate({scrollTop}, duration);
-    }
-
-    throttled = throttle(scrolling, duration, {trailing: false});
-    prevHash = hash;
+  if (target !== prevTarget) {
+    throttled = throttle(
+      jump.jump.bind(jump, target, {duration}),
+      duration * 2,
+      {trailing: false}
+    );
+    prevTarget = target;
   }
 
   throttled();
 };
 
 export default function () {
-  const $scrollElement = $('html, body');
-  const $hashLinks = $('a[href^="#"]');
+  const hashLinks = document.querySelectorAll('a[href^="#"]');
 
-  for (const hashLink of $hashLinks) {
-    const $hashLink = $(hashLink);
-    const hash = $hashLink.attr('href').slice(1);
-    $hashLink.on('click', scrollToHash.bind(null, hash, $scrollElement));
+  for (const hashLink of hashLinks) {
+    const {href} = hashLink;
+    const hash = href.substr(href.lastIndexOf('#'));
+    const target = hash !== '#top' ? hash : 'body';
+
+    hashLink.addEventListener('click', scrollToTarget.bind(null, target));
   }
 }

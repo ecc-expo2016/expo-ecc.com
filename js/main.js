@@ -1,7 +1,6 @@
 'use strict';
 import 'picturefill';
 import 'babel-polyfill';
-import $ from 'jquery';
 import createSymbol from './createSymbol';
 import toggleNavigation from './toggleNavigation';
 import indicateActiveNavigation from './indicateActiveNavigation';
@@ -27,7 +26,7 @@ const init = () => {
 };
 
 if (document.readyState === 'loading') {
-  $(init);
+  document.addEventListener('DOMContentLoaded', init);
 } else {
   init();
 }

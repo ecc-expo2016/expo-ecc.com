@@ -1,29 +1,30 @@
 'use strict';
-import $ from 'jquery';
-
 const className = 'exhibit-panel';
 
-const hideMask = ($overlay, $name) => {
-  $overlay.css('opacity', 0);
-  $name.css('opacity', 0);
+const hideMask = (overlayStyle, nameStyle) => {
+  overlayStyle.opacity = 0;
+  nameStyle.opacity = 0;
 };
 
-const showMask = ($overlay, $name) => {
-  $overlay.css('opacity', 1);
-  $name.css('opacity', 1);
+const showMask = (overlayStyle, nameStyle) => {
+  overlayStyle.opacity = 1;
+  nameStyle.opacity = 1;
 };
 
 export default function () {
-  const $overlays = $(`.${className}__overlay`);
+  const panels = document.querySelectorAll(`.${className}`);
 
-  for (const overlay of $overlays) {
-    const $overlay = $(overlay);
-    const $name = $overlay
-      .closest(`.${className}`).find(`.${className}__name`);
+  for (const panel of panels) {
+    const overlay = panel.querySelector(`.${className}__overlay`);
+    const nameStyle = panel.querySelector(`.${className}__name`).style;
 
-    $overlay.on({
-      mouseenter: hideMask.bind(null, $overlay, $name),
-      mouseleave: showMask.bind(null, $overlay, $name)
-    });
+    overlay.addEventListener(
+      'mouseenter',
+      hideMask.bind(null, overlay.style, nameStyle)
+    );
+    overlay.addEventListener(
+      'mouseleave',
+      showMask.bind(null, overlay.style, nameStyle)
+    );
   }
 }

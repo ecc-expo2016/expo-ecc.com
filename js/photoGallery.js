@@ -1,13 +1,9 @@
 'use strict';
-import $ from 'jquery';
 import throttle from 'lodash.throttle';
 
-const $html = $('html');
-let $fullscreen = null;
-let $next = null;
-let $prev = null;
-let isLoaded = false;
+const rootClasses = document.documentElement.classList;
 let isOpen = false;
+let isLoaded = false;
 
 const photos = [
   {
@@ -51,7 +47,13 @@ const classNames = {
   }
 };
 
-const createPhotoElements = $gallery => {
+const empty = el => {
+  while (el.firstChild) {
+    el.removeChild(el.firstChild);
+  }
+};
+
+const createPhotoElements = container => {
   const html = photos.map(({thumbnail}, i) => `
     <li class="${classNames.item}">
       <figure class="${classNames.img}" data-index="${i}">
@@ -60,129 +62,156 @@ const createPhotoElements = $gallery => {
     </li>
   `).join('');
 
-  $gallery.html(html);
+  empty(container);
+  container.insertAdjacentHTML('beforeend', html);
 };
 
-const toggleButton = index => {
+const toggleButton = (fullscreen, index) => {
+  const nextClasses = fullscreen.querySelector(`.${classNames.fs.next}`)
+    .classList;
+  const prevClasses = fullscreen.querySelector(`.${classNames.fs.prev}`)
+    .classList;
   const isFirst = index === 0;
   const isEnd = index === photos.length - 1;
 
   if (isFirst) {
-    $prev.removeClass(classNames.fs.shown);
+    prevClasses.remove(classNames.fs.shown);
   } else {
-    $prev.addClass(classNames.fs.shown);
+    prevClasses.add(classNames.fs.shown);
   }
 
   if (isEnd) {
-    $next.removeClass(classNames.fs.shown);
+    nextClasses.remove(classNames.fs.shown)
   } else {
-    $next.addClass(classNames.fs.shown);
+    nextClasses.add(classNames.fs.shown);
   }
 };
 
-const zoomImage = $img => {
+const openImage = (fullscreen, index) => {
   if (!isOpen) {
-    $html.addClass('freeze');
+    rootClasses.add('freeze');
+  }
 
-    const index = parseInt($img.attr('data-index'), 10);
-    const {original} = photos[index];
-    const $originalImage = $('<img>').addClass(classNames.fs.img)
-      .attr({
-        src: original,
-        'data-index': index
-      });
+  const {original} = photos[index];
 
-    $fullscreen.append($originalImage).addClass('is-open');
-    toggleButton(index);
+  if (isOpen) {
+    const prevImage = fullscreen.querySelector(`.${classNames.fs.img}`);
 
+    if (!isLoaded) {
+      prevImage.src = '';
+    }
+
+    prevImage.src = original;
+    prevImage.dataset.index = index;
+  } else {
+    const newImage = `<img class="${classNames.fs.img}" src="${original}"
+      data-index="${index}">`;
+
+    fullscreen.insertAdjacentHTML('beforeend', newImage);
+  }
+
+  toggleButton(fullscreen, index);
+
+  if (!isOpen) {
+    fullscreen.classList.add('is-open');
     isOpen = true;
   }
 };
 
-const changeImage = count => {
+const changeImage = (fullscreen, n) => {
   if (isOpen) {
-    const $img = $fullscreen.find(`.${classNames.fs.img}`);
-    const index = parseInt($img.attr('data-index'), 10);
-    const newIndex = index + count;
-
-    const isFirst = newIndex === -1;
-    const isEnd = newIndex === photos.length;
+    const index = parseInt(
+      fullscreen.querySelector(`.${classNames.fs.img}`).dataset.index,
+      10
+    );
+    const nextIndex = index + n;
+    const isFirst = nextIndex === -1;
+    const isEnd = nextIndex === photos.length;
 
     if (isFirst || isEnd) {return;}
 
-    if (!isLoaded) {
-      $img.attr('src', '');
-    }
-
-    const {original} = photos[newIndex];
-    $img.attr('src', original).attr('data-index', newIndex);
-    toggleButton(newIndex);
+    openImage(fullscreen, nextIndex);
   }
 };
 
-const closeImage = async () => {
+const closeImage = async fullscreen => {
   if (isOpen) {
-    $html.removeClass('freeze');
-    $fullscreen.removeClass('is-open');
-    $next.removeClass(classNames.fs.shown);
-    $prev.removeClass(classNames.fs.shown);
+    fullscreen.querySelector(`.${classNames.fs.next}`)
+      .classList.remove(classNames.fs.shown);
+    fullscreen.querySelector(`.${classNames.fs.prev}`)
+      .classList.remove(classNames.fs.shown);
+    rootClasses.remove('freeze');
+    fullscreen.classList.remove('is-open');
 
-    await new Promise(done => $fullscreen.on('transitionend', done));
-    $fullscreen.find(`.${classNames.fs.img}`).remove();
+    await new Promise(done => fullscreen.addEventListener(
+      'transitionend',
+      done
+    ));
 
+    fullscreen.removeChild(fullscreen.querySelector(`.${classNames.fs.img}`));
     isOpen = false;
   }
 };
 
-const handleKeyDown = evt => {
+const handleKeyDown = (fullscreen, evt) => {
   const ESCAPE = 27;
   const ARROW_RIGHT = 39;
   const ARROW_LEFT = 37;
 
   switch (evt.keyCode) {
     case ESCAPE:
-      closeImage();
+      closeImage(fullscreen);
       break;
     case ARROW_RIGHT:
-      changeImage(1);
+      changeImage(fullscreen, 1);
       break;
     case ARROW_LEFT:
-      changeImage(-1);
+      changeImage(fullscreen, -1);
       break;
   }
 };
 
 const preloadOriginalImages = async () => {
   const html = photos.map(({original}) =>
-    `<link rel="prefetch" href="${original}" type="image/png">`
+    `<link rel="preload prefetch" href="${original}" type="image/png">`
   ).join('');
 
-  $('head').append(html);
+  document.querySelector('head').insertAdjacentHTML('beforeend', html);
 
-  await Promise.all([...$('link[rel="prefetch"]')].map(prefetch => {
-    return new Promise(done => $(prefetch).on('load', done));
-  }));
+  await Promise.all(
+    [...document.querySelectorAll('link[rel="prefetch"]')].map(prefetch => {
+      return new Promise(done => prefetch.addEventListener('load', done));
+    })
+  )
 
   isLoaded = true;
 };
 
 export default function () {
-  const $gallery = $('.gallery');
-  createPhotoElements($gallery);
-  preloadOriginalImages();
+  const gallery = document.querySelector(`.${classNames.root}`);
+  createPhotoElements(gallery);
 
-  $fullscreen = $(`.${classNames.fs.root}`);
-  $next = $fullscreen.find(`.${classNames.fs.next}`);
-  $prev = $fullscreen.find(`.${classNames.fs.prev}`);
-  const $imgs = $gallery.find(`.${classNames.img}`);
+  const galleryImgs = gallery.querySelectorAll(`.${classNames.img}`);
+  const fullscreen = document.querySelector(`.${classNames.fs.root}`);
 
-  for (const img of $imgs) {
-    const $img = $(img);
-    $img.on('click', zoomImage.bind(null, $img));
+  for (const img of galleryImgs) {
+    const index = parseInt(img.dataset.index, 10);
+    img.addEventListener('click', openImage.bind(null, fullscreen, index));
   }
 
-  $next.on('click', changeImage.bind(null, 1));
-  $prev.on('click', changeImage.bind(null, -1));
-  $fullscreen.find(`.${classNames.fs.bg}`).on('click', closeImage);
-  $(document).on('keydown', handleKeyDown);
+  fullscreen.querySelector(`.${classNames.fs.next}`).addEventListener(
+    'click',
+    changeImage.bind(null, fullscreen, 1)
+  );
+  fullscreen.querySelector(`.${classNames.fs.prev}`).addEventListener(
+    'click',
+    changeImage.bind(null, fullscreen, -1)
+  );
+  fullscreen.querySelector(`.${classNames.fs.bg}`).addEventListener(
+    'click',
+    closeImage.bind(null, fullscreen)
+  );
+  document.addEventListener('keydown', handleKeyDown.bind(null, fullscreen));
+
+  setTimeout(preloadOriginalImages, 0);
 }

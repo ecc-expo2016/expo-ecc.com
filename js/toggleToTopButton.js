@@ -1,30 +1,25 @@
 'use strict';
-import $ from 'jquery';
 import debounce from 'lodash.debounce';
 
-const $window = $(window);
-
-const toggleToTopButton = debounce($btn => {
-  if ($window.scrollTop() > $window.height()) {
-    $btn.css({
-      visibility: 'visible',
-      opacity: 1
-    });
-  } else {
-    $btn.css({
-      visibility: 'hidden',
-      opacity: 0
-    });
+const toggleToTopButton = debounce(buttonStyle => {
+  if (window.pageYOffset > window.innerHeight) {
+    buttonStyle.visibility = 'visible';
+    buttonStyle.opacity = 1;
+    return;
   }
+
+  buttonStyle.visibility = 'hidden';
+  buttonStyle.opacity = 0;
 }, 300);
 
 export default function () {
-  const fn = toggleToTopButton.bind(null, $('.to-top'));
+  const fn = toggleToTopButton.bind(
+    null,
+    document.querySelector('.to-top').style
+  );
 
   fn();
 
-  $window.on({
-    scroll: fn,
-    resize: fn
-  });
+  window.addEventListener('scroll', fn);
+  window.addEventListener('resize', fn);
 }

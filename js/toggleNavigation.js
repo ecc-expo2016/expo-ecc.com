@@ -1,40 +1,52 @@
 'use strict';
-import $ from 'jquery';
-
 let isOpen = false;
 
-let open = ($btn, $nav) => {
-  $btn
-    .removeClass('is-close')
-    .addClass('is-open');
-
-  $nav.addClass('is-open');
+const open = (buttonClasses, navClasses) => {
+  buttonClasses.remove('is-close');
+  buttonClasses.add('is-open');
+  navClasses.add('is-open');
 
   isOpen = true;
 };
 
-let close = ($btn, $nav) => {
-  $btn
-    .removeClass('is-open')
-    .addClass('is-close');
-
-  $nav.removeClass('is-open');
+const close = (buttonClasses, navClasses) => {
+  buttonClasses.remove('is-open');
+  buttonClasses.add('is-close');
+  navClasses.remove('is-open');
 
   isOpen = false;
 };
 
-const toggleNavigation = () => isOpen ? close() : open();
+const toggleNavigation = (buttonClasses, navClasses) => {
+  if (isOpen) {
+    return close(buttonClasses, navClasses);
+  }
 
-const closeNavigation = () => isOpen && close();
+  open(buttonClasses, navClasses);
+};
+
+const closeNavigation = (buttonClasses, navClasses) => {
+  if (isOpen) {
+    close(buttonClasses, navClasses);
+  }
+};
 
 export default function () {
-  const $btn = $('.header__btn');
-  const $nav = $('.nav');
-  open = open.bind(null, $btn, $nav);
-  close = close.bind(null, $btn, $nav);
+  const button = document.querySelector('.header__btn');
+  const buttonClasses = button.classList;
+  const navClasses = document.querySelector('.nav').classList;
 
-  $btn.on('click', toggleNavigation);
+  button.addEventListener(
+    'click',
+    toggleNavigation.bind(null, buttonClasses, navClasses)
+  );
 
-  const $hashLink = $('a[href^="#"]');
-  $hashLink.on('click', closeNavigation);
+  const hashLinks = document.querySelectorAll('a[href^="#"]');
+
+  for (const hashLink of hashLinks) {
+    hashLink.addEventListener(
+      'click',
+      closeNavigation.bind(null, buttonClasses, navClasses)
+    );
+  }
 }
