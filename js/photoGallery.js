@@ -6,6 +6,7 @@ const $html = $('html');
 let $fullscreen = null;
 let $next = null;
 let $prev = null;
+let isLoaded = false;
 let isOpen = false;
 
 const photos = [
@@ -109,7 +110,7 @@ const changeImage = count => {
 
     if (isFirst || isEnd) {return;}
 
-    if (document.readyState !== 'complete') {
+    if (!isLoaded) {
       $img.attr('src', '');
     }
 
@@ -151,12 +152,18 @@ const handleKeyDown = evt => {
   }
 };
 
-const preloadOriginalImages = () => {
+const preloadOriginalImages = async () => {
   const html = photos.map(({original}) =>
     `<link rel="prefetch" href="${original}" type="image/png">`
   ).join('');
 
   $('head').append(html);
+
+  await Promise.all([...$('link[rel="prefetch"]')].map(prefetch => {
+    return new Promise(done => $(prefetch).on('load', done));
+  }));
+
+  isLoaded = true;
 };
 
 export default function () {
