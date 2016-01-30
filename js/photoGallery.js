@@ -51,16 +51,15 @@ const classNames = {
 };
 
 const createPhotoElements = $gallery => {
-  const $documentFragment = $(document.createDocumentFragment());
+  const html = photos.map(({thumbnail}, i) => `
+    <li class="${classNames.item}">
+      <figure class="${classNames.img}" data-index="${i}">
+        <img src="${thumbnail}">
+      </figure>
+    </li>
+  `).join('');
 
-  photos.forEach(({thumbnail}, i) => {
-    const $img = $('<img>').addClass(classNames.img)
-      .attr('src', thumbnail).data('index', i);
-    const $item = $('<li>').addClass(classNames.item).append($img);
-    $documentFragment.append($item);
-  });
-
-  $gallery.html($documentFragment);
+  $gallery.html(html);
 };
 
 const toggleButton = index => {
@@ -84,14 +83,15 @@ const zoomImage = $img => {
   if (!isOpen) {
     $html.addClass('freeze');
 
-    const index = $img.data('index');
+    const index = parseInt($img.attr('data-index'), 10);
     const {original} = photos[index];
-    const $newImg = $('<img>')
-      .addClass(classNames.fs.img)
-      .attr('src', original).data('index', index)
-      .appendTo($fullscreen);
+    const $originalImage = $('<img>').addClass(classNames.fs.img)
+      .attr({
+        src: original,
+        'data-index': index
+      });
 
-    $fullscreen.addClass('is-open');
+    $fullscreen.append($originalImage).addClass('is-open');
     toggleButton(index);
 
     isOpen = true;
@@ -101,7 +101,7 @@ const zoomImage = $img => {
 const changeImage = count => {
   if (isOpen) {
     const $img = $fullscreen.find(`.${classNames.fs.img}`);
-    const index = $img.data('index');
+    const index = parseInt($img.attr('data-index'), 10);
     const newIndex = index + count;
 
     const isFirst = newIndex === -1;
@@ -114,8 +114,7 @@ const changeImage = count => {
     }
 
     const {original} = photos[newIndex];
-
-    $img.attr('src', original).data('index', newIndex);
+    $img.attr('src', original).attr('data-index', newIndex);
     toggleButton(newIndex);
   }
 };
@@ -152,22 +151,15 @@ const handleKeyDown = evt => {
   }
 };
 
-const preloadOriginalImages = async () => {
-  const $documentFragment = $(document.createDocumentFragment());
+const preloadOriginalImages = () => {
+  const html = photos.map(({original}) =>
+    `<link rel="prefetch" href="${original}" type="image/png">`
+  ).join('');
 
-  photos.forEach(({original}) => {
-    const $prefetch = $('<link>').attr({
-      rel: 'prefetch',
-      href: original,
-      type: 'image/png'
-    });
-    $documentFragment.append($prefetch);
-  });
-
-  $('head').append($documentFragment);
+  $('head').append(html);
 };
 
-export default async function () {
+export default function () {
   const $gallery = $('.gallery');
   createPhotoElements($gallery);
   preloadOriginalImages();

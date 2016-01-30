@@ -51,11 +51,36 @@
   }
 
   &__img {
-    // for Firefox
-    width: 100%;
-
+    position: relative;
+    border: 4px solid;
+    box-shadow: 1px 1px 4px rgba($black,.8);
+    transition: border-color .5s;
     cursor: pointer;
     cursor: zoom-in;
+
+    img {
+      // for Firefox
+      width: 100%;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba($white,.2);
+      transition: opacity .5s;
+    }
+
+    &:hover {
+      border-color: $brand-blue;
+
+      &::before {
+        opacity: 0;
+      }
+    }
   }
 
   &-fullscreen {
