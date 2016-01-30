@@ -4,23 +4,10 @@ import throttle from 'lodash.throttle';
 
 const jump = new Jump();
 const duration = 800;
-let throttled = null;
-let prevTarget = null;
 
-const scrollToTarget = (target, evt) => {
-  evt.preventDefault();
-
-  if (target !== prevTarget) {
-    throttled = throttle(
-      jump.jump.bind(jump, target, {duration}),
-      duration * 2,
-      {trailing: false}
-    );
-    prevTarget = target;
-  }
-
-  throttled();
-};
+const scrollToTarget = throttle(target => {
+  jump.jump(target, {duration});
+}, duration * 2, {trailing: false});
 
 export default function () {
   const hashLinks = document.querySelectorAll('a[href^="#"]');
@@ -30,6 +17,7 @@ export default function () {
     const hash = href.substr(href.lastIndexOf('#'));
     const target = hash !== '#top' ? hash : 'body';
 
+    hashLink.addEventListener('click', evt => evt.preventDefault());
     hashLink.addEventListener('click', scrollToTarget.bind(null, target));
   }
 }

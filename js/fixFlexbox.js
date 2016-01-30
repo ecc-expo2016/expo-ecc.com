@@ -9,19 +9,21 @@ const fixHeight = el => {
   style.height = `${el.offsetHeight}px`;
 };
 
+const fixElementsHeight = debounce(els => {
+  for (const img of imgs) {
+    fixHeight(img);
+  }
+}, 100);
+
 export default async function () {
   if (isIE11) {
-    const imgs = document.querySelectorAll('.gallery__img');
+    const imgs = document.querySelectorAll('.gallery__img img');
 
     await Promise.all([...imgs].map(img => {
       return new Promise(done => img.addEventListener('load', done));
     }));
 
-    const fn = debounce(() => {
-      for (const img of imgs) {
-        fixHeight(img);
-      }
-    }, 100);
+    const fn = fixElementsHeight.bind(null, imgs);
 
     fn();
 

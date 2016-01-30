@@ -2,19 +2,23 @@
 let isOpen = false;
 
 const open = (buttonClasses, navClasses) => {
-  buttonClasses.remove('is-close');
-  buttonClasses.add('is-open');
-  navClasses.add('is-open');
+  if (!isOpen) {
+    buttonClasses.remove('is-close');
+    buttonClasses.add('is-open');
+    navClasses.add('is-open');
 
-  isOpen = true;
+    isOpen = true;
+  }
 };
 
 const close = (buttonClasses, navClasses) => {
-  buttonClasses.remove('is-open');
-  buttonClasses.add('is-close');
-  navClasses.remove('is-open');
+  if (isOpen) {
+    buttonClasses.remove('is-open');
+    buttonClasses.add('is-close');
+    navClasses.remove('is-open');
 
-  isOpen = false;
+    isOpen = false;
+  }
 };
 
 const toggleNavigation = (buttonClasses, navClasses) => {

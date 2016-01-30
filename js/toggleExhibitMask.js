@@ -16,15 +16,16 @@ export default function () {
 
   for (const panel of panels) {
     const overlay = panel.querySelector(`.${className}__overlay`);
+    const overlayStyle = overlay.style;
     const nameStyle = panel.querySelector(`.${className}__name`).style;
 
     overlay.addEventListener(
       'mouseenter',
-      hideMask.bind(null, overlay.style, nameStyle)
+      hideMask.bind(null, overlayStyle, nameStyle)
     );
     overlay.addEventListener(
       'mouseleave',
-      showMask.bind(null, overlay.style, nameStyle)
+      showMask.bind(null, overlayStyle, nameStyle)
     );
   }
 }
