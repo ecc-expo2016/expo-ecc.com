@@ -187,7 +187,7 @@ const preloadOriginalImages = async () => {
   isLoaded = true;
 };
 
-export default function () {
+export default async function () {
   const gallery = document.querySelector(`.${classNames.root}`);
   createPhotoElements(gallery);
 
@@ -213,5 +213,11 @@ export default function () {
   );
   document.addEventListener('keydown', handleKeyDown.bind(null, fullscreen));
 
-  setTimeout(preloadOriginalImages, 0);
+  await Promise.all([...galleryImgs].map(img => {
+    return new Promise(done =>
+      img.querySelector('img').addEventListener('load', done)
+    );
+  }));
+
+  preloadOriginalImages();
 }
