@@ -19,6 +19,12 @@
   &__logo {
     margin-right: 1rem;
     flex-basis: calc(100% - 32px);
+
+    img {
+      max-height: 32px;
+      padding-top: 2px;
+      padding-bottom: 2px;
+    }
   }
 
   &__btn {
