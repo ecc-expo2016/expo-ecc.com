@@ -194,9 +194,12 @@ export default async function () {
   const galleryImgs = gallery.querySelectorAll(`.${classNames.img}`);
   const fullscreen = document.querySelector(`.${classNames.fs.root}`);
 
-  for (const img of galleryImgs) {
-    const index = parseInt(img.dataset.index, 10);
-    img.addEventListener('click', openImage.bind(null, fullscreen, index));
+  for (const galleryImg of galleryImgs) {
+    const index = parseInt(galleryImg.dataset.index, 10);
+    galleryImg.addEventListener(
+      'click',
+      openImage.bind(null, fullscreen, index)
+    );
   }
 
   fullscreen.querySelector(`.${classNames.fs.next}`).addEventListener(
@@ -213,10 +216,10 @@ export default async function () {
   );
   document.addEventListener('keydown', handleKeyDown.bind(null, fullscreen));
 
-  await Promise.all([...galleryImgs].map(img => {
-    return new Promise(done =>
-      img.querySelector('img').addEventListener('load', done)
-    );
+  const imgs = gallery.querySelectorAll(`.${classNames.img} img`);
+
+  await Promise.all([...imgs].map(img => {
+    return new Promise(done => img.addEventListener('load', done));
   }));
 
   preloadOriginalImages();

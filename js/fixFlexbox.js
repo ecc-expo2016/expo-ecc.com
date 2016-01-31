@@ -10,8 +10,8 @@ const fixHeight = el => {
 };
 
 const fixElementsHeight = debounce(els => {
-  for (const img of imgs) {
-    fixHeight(img);
+  for (const el of els) {
+    fixHeight(el);
   }
 }, 100);
 

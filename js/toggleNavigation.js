@@ -1,7 +1,7 @@
 'use strict';
 let isOpen = false;
 
-const open = (buttonClasses, navClasses) => {
+const openNavigation = (buttonClasses, navClasses) => {
   if (!isOpen) {
     buttonClasses.remove('is-close');
     buttonClasses.add('is-open');
@@ -11,7 +11,7 @@ const open = (buttonClasses, navClasses) => {
   }
 };
 
-const close = (buttonClasses, navClasses) => {
+const closeNavigation = (buttonClasses, navClasses) => {
   if (isOpen) {
     buttonClasses.remove('is-open');
     buttonClasses.add('is-close');
@@ -22,17 +22,9 @@ const close = (buttonClasses, navClasses) => {
 };
 
 const toggleNavigation = (buttonClasses, navClasses) => {
-  if (isOpen) {
-    return close(buttonClasses, navClasses);
-  }
-
-  open(buttonClasses, navClasses);
-};
-
-const closeNavigation = (buttonClasses, navClasses) => {
-  if (isOpen) {
-    close(buttonClasses, navClasses);
-  }
+  isOpen
+    ? closeNavigation(buttonClasses, navClasses)
+    : openNavigation(buttonClasses, navClasses);
 };
 
 export default function () {
