@@ -7,7 +7,7 @@ const duration = 800;
 
 const scrollToTarget = throttle(target => {
   jump.jump(target, {duration});
-}, duration * 2, {trailing: false});
+}, duration, {trailing: false});
 
 export default function () {
   const hashLinks = document.querySelectorAll('a[href^="#"]');
