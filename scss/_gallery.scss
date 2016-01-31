@@ -108,7 +108,7 @@
       z-index: -1;
       background-color: $black;
       cursor: pointer;
-      cursor: zoom-out;
+      cursor: url('/img/close.png') 16 16, zoom-out;
     }
 
     &__img {
