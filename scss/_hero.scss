@@ -55,6 +55,10 @@
       @media (min-width: $break-point) {
         display: none;
       }
+
+      img {
+        max-width: 580px;
+      }
     }
   }
 

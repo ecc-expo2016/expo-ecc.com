@@ -2,33 +2,29 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 100;
+  z-index: 1;
   width: 100%;
+}
 
-  &__sp {
-    position: relative;
-    display: flex;
-    padding: 1rem;
-    background-color: $black;
-
-    @media (min-width: $break-point) {
-      display: none;
-    }
-  }
+.header-sp {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  padding: 1rem;
+  background-color: $black;
 
   &__logo {
     margin-right: 1rem;
     flex-basis: calc(100% - 32px);
 
     img {
-      max-height: 32px;
       padding-top: 2px;
       padding-bottom: 2px;
     }
   }
 
   &__btn {
-    $this: &;
+    $block: &;
 
     position: relative;
     flex-basis: 32px;
@@ -58,26 +54,30 @@
     }
 
     &.is-open {
-      #{$this}__line--top {
-        animation: createX-top .5s forwards;
-      }
+      #{$block}__line {
+        &--top {
+          animation: createX-top .5s forwards;
+        }
 
-      #{$this}__line--middle {
-        opacity: 0;
-      }
+        &--middle {
+          opacity: 0;
+        }
 
-      #{$this}__line--bottom {
-        animation: createX-bottom .5s forwards;
+        &--bottom {
+          animation: createX-bottom .5s forwards;
+        }
       }
     }
 
     &.is-close {
-      #{$this}__line--top {
-        animation: closeX-top .5s;
-      }
+      #{$block}__line {
+        &--top {
+          animation: closeX-top .5s;
+        }
 
-      #{$this}__line--bottom {
-        animation: closeX-bottom .5s;
+        &--bottom {
+          animation: closeX-bottom .5s;
+        }
       }
     }
   }

@@ -1,9 +1,12 @@
 'use strict';
+import throttle from 'lodash.throttle';
+import Jump from 'jump.js';
+
 const title = 'ECC EXPO 2016';
 const href = 'http://expo-ecc.com/';
 const twitterId = 'EccCcad';
 
-const shareOnTwitter = () => {
+export const shareOnTwitter = () => {
   const url = 'https://twitter.com/intent/tweet?' +
     `related=${twitterId}&` + `text=${title}&` +
     `url=${href}&` + `via=${twitterId}`;
@@ -18,23 +21,17 @@ const shareOnTwitter = () => {
   window.open(url, null, features);
 };
 
-const shareOnFacebook = () => {
+export const shareOnFacebook = () => {
   FB.ui({
     method: 'share',
     href
   });
 };
 
-export default function () {
-  const twitterButtons = document.querySelectorAll('.twitter');
+const jump = new Jump();
+const duration = 800;
 
-  for (const twitter of twitterButtons) {
-    twitter.addEventListener('click', shareOnTwitter);
-  }
-
-  const facebookButtons = document.querySelectorAll('.facebook');
-
-  for (const facebook of facebookButtons) {
-    facebook.addEventListener('click', shareOnFacebook);
-  }
-}
+export const scrollToTarget = throttle(target => {
+  target = target === 'top' ? 'body' : `#${target}`;
+  jump.jump(target, {duration});
+}, duration, {trailing: false});

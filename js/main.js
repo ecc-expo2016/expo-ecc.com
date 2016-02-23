@@ -1,27 +1,28 @@
 'use strict';
-import 'picturefill';
 import 'babel-polyfill';
-import createSymbol from './createSymbol';
-import toggleNavigation from './toggleNavigation';
-import indicateActiveNavigation from './indicateActiveNavigation';
-import scrollSmoothly from './scrollSmoothly';
-import shareToSocial from './shareToSocial';
-import toggleToTopButton from './toggleToTopButton';
-import toggleExhibitMask from './toggleExhibitMask';
-import photoGallery from './photoGallery';
-import fixFlexbox from './fixFlexbox';
+import {render} from 'react-dom';
+import App from './components/app';
+import {contents, exhibits, photos} from './data';
 import developerMessage from './developerMessage';
 
 const init = () => {
-  createSymbol();
-  toggleNavigation();
-  indicateActiveNavigation();
-  scrollSmoothly();
-  shareToSocial();
-  toggleToTopButton();
-  toggleExhibitMask();
-  photoGallery();
-  fixFlexbox();
+  const app = new App({
+    renderer: el => render(el, document.querySelector('#app')),
+    initialState: {
+      contents,
+      exhibits,
+      photos,
+      isPC: false,
+      isNavOpen: false,
+      gallery: {
+        isOpen: false,
+        currentIndex: 0
+      }
+    }
+  });
+
+  app.update(state => state);
+
   developerMessage();
 };
 

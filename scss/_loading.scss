@@ -1,0 +1,49 @@
+.loading {
+  $cyan: #00a0e9;
+  $magenta: #cd2f60;
+  $yellow: #fff100;
+
+  position: fixed;
+  right: 50%;
+  bottom: 50%;
+  display: flex;
+  transform: translate(50%,50%);
+
+  &__dot {
+    width: 2rem;
+    height: 2rem;
+    margin-right: .5rem;
+    margin-left: .5rem;
+    border-radius: 50%;
+
+    &--cyan {
+      background-color: $cyan;
+      animation: jumping 1.8s infinite;
+    }
+
+    &--magenta {
+      background-color: $magenta;
+      animation: jumping 1.8s .6s infinite;
+    }
+
+    &--yellow {
+      background-color: $yellow;
+      animation: jumping 1.8s 1.2s infinite;
+    }
+  }
+}
+
+@keyframes jumping {
+  0% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-1rem);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
