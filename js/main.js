@@ -2,7 +2,7 @@
 import 'babel-polyfill';
 import {render} from 'react-dom';
 import App from './components/app';
-import {contents, exhibits, photos} from './data';
+import {contents, exhibits, photos, result} from './data';
 import developerMessage from './developerMessage';
 
 const init = () => {
@@ -12,12 +12,14 @@ const init = () => {
       contents,
       exhibits,
       photos,
+      result,
       isPC: false,
       isNavOpen: false,
       gallery: {
         isOpen: false,
         currentIndex: 0
-      }
+      },
+      showingResult: exhibits[0].id
     }
   });
 

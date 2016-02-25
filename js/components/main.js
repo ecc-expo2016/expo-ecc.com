@@ -10,10 +10,13 @@ export default class Main extends Component {
     contents: PropTypes.array.isRequired,
     exhibits: PropTypes.array.isRequired,
     photos: PropTypes.array.isRequired,
-    gallery: PropTypes.object.isRequired
+    gallery: PropTypes.object.isRequired,
+    result: PropTypes.array.isRequired,
+    showingResult: PropTypes.string.isRequired
   };
   render() {
-    const {contents, exhibits, photos, gallery} = this.props;
+    const {contents, exhibits, photos, gallery, result,
+      showingResult} = this.props;
 
     return (
       <main>
@@ -23,7 +26,9 @@ export default class Main extends Component {
           contents={contents}
           exhibits={exhibits}
           photos={photos}
-          gallery={gallery} />
+          gallery={gallery}
+          result={result}
+          showingResult={showingResult} />
       </main>
     );
   }

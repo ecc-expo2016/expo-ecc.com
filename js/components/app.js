@@ -62,10 +62,18 @@ export default class App extends Flux {
       });
     });
 
+    this.on('changeResult', target => {
+      this.update(state => {
+        state.showingResult = target;
+        return state;
+      });
+    });
+
     window.addEventListener('resize', this.handleResize);
   }
   render(state) {
-    const {contents, exhibits, photos, isPC, isNavOpen, gallery} = state;
+    const {contents, exhibits, photos, isPC, isNavOpen, gallery,
+      result, showingResult} = state;
 
     return (
       <div>
@@ -77,7 +85,9 @@ export default class App extends Flux {
           contents={contents}
           exhibits={exhibits}
           photos={photos}
-          gallery={gallery} />
+          gallery={gallery}
+          result={result}
+          showingResult={showingResult} />
         <Footer />
       </div>
     );

@@ -6,16 +6,20 @@ import Exhibit from './contents/exhibit';
 import Access from './contents/access';
 import Gallery from './contents/gallery';
 import Movie from './contents/movie';
+import Result from './contents/result';
 
 export default class Contents extends Component {
   static propTypes = {
     contents: PropTypes.array.isRequired,
     exhibits: PropTypes.array.isRequired,
     photos: PropTypes.array.isRequired,
-    gallery: PropTypes.object.isRequired
+    gallery: PropTypes.object.isRequired,
+    result: PropTypes.array.isRequired,
+    showingResult: PropTypes.string.isRequired
   };
   render() {
-    const {contents, exhibits, photos, gallery} = this.props;
+    const {contents, exhibits, photos, gallery, result,
+      showingResult} = this.props;
 
     return (
       <div className='container'>
@@ -46,6 +50,13 @@ export default class Contents extends Component {
                     );
                   case 'movie':
                     return <Movie />;
+                  case 'result':
+                    return (
+                      <Result
+                        exhibits={exhibits}
+                        result={result}
+                        showingResult={showingResult} />
+                    );
                 }
               })()}
             </div>

@@ -5,7 +5,7 @@ import Symbol from '../symbol';
 
 export default class SymbolContainer extends Component {
   componentDidMount() {
-    // new Symbol(this.refs.symbol);
+    new Symbol(this.refs.symbol);
   }
   render() {
     return (

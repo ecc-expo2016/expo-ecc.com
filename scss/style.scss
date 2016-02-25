@@ -97,6 +97,26 @@ img {
   margin-left: auto;
 }
 
+.fade {
+  &-enter {
+    opacity: .01;
+
+    &#{&}-active {
+      opacity: 1;
+      transition: opacity 300ms ease-in-out;
+    }
+  }
+
+  &-leave {
+    opacity: 1;
+
+    &#{&}-active {
+      opacity: 0.01;
+      transition: opacity 300ms ease-in-out;
+    }
+  }
+}
+
 @import 'header';
 @import 'nav';
 @import 'symbol';
@@ -107,4 +127,5 @@ img {
 @import 'gallery';
 @import 'video';
 @import 'footer';
+@import 'result';
 @import 'loading';

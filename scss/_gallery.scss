@@ -162,23 +162,3 @@
     }
   }
 }
-
-.fade {
-  &-enter {
-    opacity: .01;
-
-    &#{&}-active {
-      opacity: 1;
-      transition: opacity 300ms ease-in-out;
-    }
-  }
-
-  &-leave {
-    opacity: 1;
-
-    &#{&}-active {
-      opacity: 0.01;
-      transition: opacity 300ms ease-in-out;
-    }
-  }
-}
