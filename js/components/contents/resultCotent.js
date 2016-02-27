@@ -67,8 +67,10 @@ export default class ResultContent extends Component {
 
             {prize2.length === 2 && (
               <div className='result__prize'>
-                {prize2.map(prize =>
-                  <div className='result__prize__item'>
+                {prize2.map((prize, i) =>
+                  <div
+                    key={i}
+                    className='result__prize__item'>
                     <ResultWork work={prize} />
                   </div>
                 )}
