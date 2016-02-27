@@ -10,11 +10,20 @@ export default class GalleryImage extends Component {
   state = {
     isLoaded: false
   };
-  componentDidMount() {
-    const {original} = this.props;
+  preloadImage(props = this.props) {
+    const {original} = props;
     const image = new Image();
-    image.src = original;
     image.addEventListener('load', () => this.setState({isLoaded: true}));
+    image.src = original;
+  }
+  componentDidMount() {
+    this.preloadImage();
+  }
+  componentWillReceiveProps(nextProps) {
+    if (this.props.original !== nextProps.original) {
+      this.setState({isLoaded: false});
+      this.preloadImage(nextProps);
+    }
   }
   render() {
     const {thumbnail, original} = this.props;
