@@ -106,14 +106,14 @@ export const result = [
         creator: '大東 優介',
         description: 'メカ好きや、アクション好きが集まって作られたロマン溢れるゲームです。ゲームとしての完成度や、細かい演出や動きなどたくさんのこだわりを、大技やコンボを決める爽快感を味わいながら注目してほしいです。',
         thumbnail: '/img/work_i01.png',
-        prize: 1
+        prize: 2
       }, {
         name: 'Outlaw Sports Festival 2',
         team: 'Eternal Criminal Circulation',
         creator: '谷 祐治',
         description: '４人対戦の乱闘系パーティーアクションゲームです。前作から大幅にグレードアップして、より楽しめるものにしました。ぜひ、手に取って遊んでみてください。',
         thumbnail: '/img/work_i02.png',
-        prize: 2
+        prize: 1
       }, {
         name: 'Time Bomb',
         team: 'Quad',
@@ -125,7 +125,8 @@ export const result = [
         team: 'Alison Project',
         creator: '有村 沙綾',
         description: '学生最後のチーム制作だったので、プレイヤーだけでなく、制作者側も楽しんで作って遊べるゲームにしました。楽しんで遊んでもらえると嬉しいです！',
-        thumbnail: '/img/work_i04.png'
+        thumbnail: '/img/work_i04.png',
+        prize: 2
       }, {
         name: 'すしいくさ',
         team: '寿GAMES',
@@ -160,13 +161,13 @@ export const result = [
         creator: '山岡 純也',
         description: '『散る』と言うワードにはネガティブな意味が繋がりやすいように感じます。そこで、『花が散る美しさ』と言うポジティブな『散る』を表現した企画です。見やすさと雰囲気の両立にご注目頂けたらと思います。',
         thumbnail: '/img/work_h01.png',
-        prize: 1
+        prize: 2
       }, {
         name: 'チルボット',
         creator: '大東 優介',
         description: '「散り様」を「武器」にしろ！ チルボットは、""一発逆転の爽快感""と""今までやられて来た事に対する開放感""を持ったゲームです！ しかし、普通にやられているだけでは一発逆転は起きませんが、工夫して上手く「散る」事で、必殺技が撃てます！',
         thumbnail: '/img/work_h02.png',
-        prize: 2
+        prize: 1
       }, {
         name: 'Flowers',
         creator: '嶋田 剛士',
@@ -192,8 +193,7 @@ export const result = [
         name: '大暴れ！金魚すくい？',
         creator: '鄭 雨丹',
         description: '金魚たちがなぜか巨大化して、屋台から逃げ出した！祭りのガキ大将‐ちとりちゃんは金魚たちを捕まえるのか！？今回の作品はアクティブな構図を追求して作りました、キャラクターは勿論、背景のオブジェクトの変形とパースを意識してました。',
-        thumbnail: '/img/work_f02.png',
-        prize: 2
+        thumbnail: '/img/work_f02.png'
       }, {
         name: 'Mushroom House',
         creator: '東野 倖己',
@@ -213,19 +213,18 @@ export const result = [
         name: '若年騎士アルベール',
         creator: '大谷 彬洸',
         description: 'ソーシャルカードゲームを意識して制作したイラスト作品です。キャラクターは勿論ですが背景にも見所を作り全体の情報量を増やすためステンドグラスの配色には力を入れました。',
-        thumbnail: '/img/work_g01.png',
-        prize: 1
+        thumbnail: '/img/work_g01.png'
       }, {
         name: 'ラフレシアの旅',
         creator: 'ウィニムイス',
         description: '花世界の美しい花たちに存在を認められていないラフレシアは、認めてもらうために、自分の成長を望み旅に出ると決めた。イラスト構図の全体は憧れの美しい花たちを見上げながら光の元へ向かっている主人公を表現しました。',
-        thumbnail: '/img/work_g02.png',
-        prize: 2
+        thumbnail: '/img/work_g02.png'
       }, {
         name: '天使の日',
         creator: '山田 恒輝',
         description: '浮遊感と躍動感をテーマに描きました。天使の日になると翼が生えて、空を飛べるようになる少女たち。飛び慣れていない様子や普段見ることのできない風景を見た感動の表情などを表現しました。',
-        thumbnail: '/img/work_g03.png'
+        thumbnail: '/img/work_g03.png',
+        prize: 1
       }, {
         name: '煉獄の番人 イフリート',
         creator: '池田 健人',
@@ -240,14 +239,12 @@ export const result = [
         name: 'Big Bone Battle',
         creator: '巨大な人骨と忍者たちが戦いを繰り広げるムービー作品です',
         description: '射手園 智希',
-        thumbnail: '/img/work_e01.png',
-        prize: 1
+        thumbnail: '/img/work_e01.png'
       }, {
         name: 'Emptiness',
         creator: '王 瀟',
         description: '「時間の逆戻り」をテーマにした音楽ビデオデモです。歌詞はないため、逆回りの時計や、下から昇っていく雪と女性の手の動きで「逆戻りの時間」を表現してみました。廃墟も「過去に戻りたい動機」を表してみました。実際「時間の逆戻り」は今は不可能なため、「Emptiness」というタイトルを付けました。',
-        thumbnail: '/img/work_e02.png',
-        prize: 2
+        thumbnail: '/img/work_e02.png'
       }, {
         name: 'ゲーム「PROJECT STINGER」導入ムービー「決戦」',
         team: '藤原重工',
@@ -258,7 +255,8 @@ export const result = [
         name: 'DRAGON 怒りの逆襲',
         creator: '塚原 誉人',
         description: 'ドラゴンが寝ている隙に卵を盗もうとする剣士と怒りのドラゴンの戦闘ムービーです。迫力あふれるドラゴンのモーションと緊迫感の伝わる演出やカメラワークに注目してください。',
-        thumbnail: '/img/work_e04.png'
+        thumbnail: '/img/work_e04.png',
+        prize: 1
       }
     ]
   }, {
@@ -276,8 +274,7 @@ export const result = [
         team: 'KOMADAcorp.',
         creator: '辻 彩夏',
         description: '20ＸＸ年、近未来の世界。そこで政府と主人公を基軸とした組織の戦いが始まろうとしていた。技術の発展で人々の記憶が管理されるようになった現実社会と仮想空間の両面から繰り広げられるアクションヒューマンドラマ。',
-        thumbnail: '/img/work_d02.png',
-        prize: 2
+        thumbnail: '/img/work_d02.png'
       }, {
         name: 'Cut off <re:make>',
         team: 'KOMADAcorp.',
@@ -307,8 +304,7 @@ export const result = [
         creator: '斉藤 麻亜子',
         description: '小学生向けの職業体験施設が運営するWebサービス「ドリペット」。ゲームで遊びながら、様々な職業の存在を知り、夢を持ってもらったり、もっと広い視野で夢を見てもらうことが目的です。ぜひ遊んでみてください♪',
         thumbnail: '/img/work_b02.png',
-        url: 'http://click.ecc.ac.jp/~dw3a05/DRIPET/',
-        prize: 2
+        url: 'http://click.ecc.ac.jp/~dw3a05/DRIPET/'
       }, {
         name: 'KARUKU',
         creator: '村島 由希絵',
@@ -330,14 +326,13 @@ export const result = [
         name: 'De\'Hsuan',
         creator: '顔 廷軒',
         description: 'カリフォルニアから発想したブランドです。リラックス、リフレッシュというコンセプトを中心に、日々忙しい働いてる女性に、日常にも使えやすい、スタイリッシュになれるデニムを提案します。今回はブランド初路面店代官山店の5周年イベントを開催します。',
-        thumbnail: '/img/work_a01.png',
-        prize: 1
+        thumbnail: '/img/work_a01.png'
       }, {
         name: 'Sweet\'s',
         creator: '宮崎 菜津美',
         description: '可愛い妖精達「Sweet\'s（スウィーティーズ）」が繰り広げる日常系新規アニメ。あなたも「ウマかわ」な世界に行ってみませんか？',
         thumbnail: '/img/work_a02.png',
-        prize: 2
+        prize: 1
       }, {
         name: 'TRY IT',
         creator: '芦田 恵利',
@@ -358,8 +353,7 @@ export const result = [
         team: 'FC3',
         creator: '浅田 清志',
         description: 'funnycameraの良さは実際に触れてみないと分かりません！触れてみると笑顔になること間違い無し！又現在App Storeにて公開中です。ITゼミで検索',
-        thumbnail: '/img/work_c01.png',
-        prize: 1
+        thumbnail: '/img/work_c01.png'
       }, {
         name: 'PhotoShare',
         team: 'PS2',
@@ -367,7 +361,7 @@ export const result = [
         description: '写真をシェアできるシステムです。アルバム写真を作成して、QRCodeやURLよりアルバムに参加できます。参加者はアルバムに写真を追加したり、コメントしたりすること ができます。このシステムの特徴は自分の写真を、他人にすぐにシェアできるところです。',
         thumbnail: '/img/work_c02.png',
         url: 'https://photoshare.space',
-        prize: 2
+        prize: 1
       }, {
         name: 'らりーつくーる',
         team: 'らりーつくーる制作部',

@@ -36,7 +36,7 @@ export default class ResultContent extends Component {
     const exhibitName = exhibits.find(({id}) => id === showingResult).name_ja;
     const {works} = result.find(({exhibit}) => exhibit === showingResult);
     const prize1 = works.find(({prize}) => prize === 1);
-    const prize2 = works.find(({prize}) => prize === 2);
+    const prize2 = works.filter(({prize}) => prize === 2);
     const otherWorks = works.filter(({prize}) => !prize);
 
     return (
@@ -57,10 +57,23 @@ export default class ResultContent extends Component {
               <div className='result__prize__item'>
                 <ResultWork work={prize1} />
               </div>
-              <div className='result__prize__item'>
-                <ResultWork work={prize2} />
-              </div>
+
+              {prize2.length === 1 && (
+                <div className='result__prize__item'>
+                  <ResultWork work={prize2[0]} />
+                </div>
+              )}
             </div>
+
+            {prize2.length === 2 && (
+              <div className='result__prize'>
+                {prize2.map(prize =>
+                  <div className='result__prize__item'>
+                    <ResultWork work={prize} />
+                  </div>
+                )}
+              </div>
+            )}
 
             <p className='result__title-entry'>入選作品</p>
 
