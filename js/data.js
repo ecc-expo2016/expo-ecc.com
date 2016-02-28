@@ -237,8 +237,8 @@ export const result = [
     works: [
       {
         name: 'Big Bone Battle',
-        creator: '巨大な人骨と忍者たちが戦いを繰り広げるムービー作品です',
-        description: '射手園 智希',
+        creator: '射手園 智希',
+        description: '巨大な人骨と忍者たちが戦いを繰り広げるムービー作品です',
         thumbnail: '/img/work_e01.png'
       }, {
         name: 'Emptiness',
