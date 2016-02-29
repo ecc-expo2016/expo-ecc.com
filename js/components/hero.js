@@ -1,8 +1,13 @@
 'use strict';
 import React, {PropTypes} from 'react';
 import {Component} from 'flumpt';
+import {scrollToTarget} from '../utils';
 
 export default class Hero extends Component {
+  handleClick = (target, evt) => {
+    evt.preventDefault();
+    scrollToTarget(target);
+  };
   render() {
     return (
       <div className='hero'>
@@ -49,6 +54,12 @@ export default class Hero extends Component {
           <img
             src='/img/logo.svg'
             alt='ECC EXPO 2016' />
+        </div>
+
+        <div className='hero__result'>
+          <a
+            href='#result'
+            onClick={this.handleClick.bind(this, 'result')}>結果発表はコチラ</a>
         </div>
       </div>
     );

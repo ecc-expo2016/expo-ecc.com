@@ -88,6 +88,51 @@
     animation: fade-in 5s,
       swing 2s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
   }
+
+  &__result {
+    position: absolute;
+    right: 50%;
+    bottom: 50%;
+    transform: translate(50%,calc(-50% - 1.6rem));
+    
+    @media (min-width: $break-point) {
+      transform: translate(50%,50%);
+    }
+
+    a {
+      position: relative;
+      display: inline-block;
+      padding: 1.4rem;
+      color: $white;
+      white-space: nowrap;
+      text-decoration: none;
+      background-color: rgba($black,.8);
+      border-radius: 1rem;
+      transition: color .5s;
+      animation: jumping 1s infinite;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        right: 50%;
+        width: 0;
+        height: 0;
+        transform: translate(50%,0);
+        border: 1rem solid transparent;
+        border-top-color: rgba($black,.8);
+      }
+
+      &:hover {
+        color: $brand-blue;
+      }
+
+      @media (min-width: $break-point) {
+        padding: 2rem;
+        font-size: 1.6rem;
+      }
+    }
+  }
 }
 
 @keyframes fade-in {
@@ -108,5 +153,17 @@
   }
   100% {
     transform: rotate(6deg);
+  }
+}
+
+@keyframes jumping {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+  100% {
+    transform: translateY(0);
   }
 }
